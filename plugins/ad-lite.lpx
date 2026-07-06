@@ -1,0 +1,18 @@
+#!name=AdLite
+#!desc=Lightweight ad blocking starter. No MITM, no scripts, low performance impact.
+#!author=limelisest
+#!homepage=https://github.com/limelisest/loon-config
+#!date=2026-07-06
+
+[Rule]
+# Generic ad/tracking domains. Keep this list small; add app-specific plugins only when needed.
+DOMAIN-SUFFIX,doubleclick.net,REJECT
+DOMAIN-SUFFIX,googleadservices.com,REJECT
+DOMAIN-SUFFIX,googlesyndication.com,REJECT
+DOMAIN-SUFFIX,adnxs.com,REJECT
+DOMAIN-SUFFIX,adsrvr.org,REJECT
+DOMAIN-SUFFIX,scorecardresearch.com,REJECT
+DOMAIN-SUFFIX,umeng.com,REJECT
+DOMAIN-SUFFIX,umengcloud.com,REJECT
+DOMAIN-SUFFIX,cnzz.com,REJECT
+DOMAIN-SUFFIX,flurry.com,REJECT

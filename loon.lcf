@@ -1,0 +1,48 @@
+# Loon cloud config template (.lcf)
+# Maintainer: limelisest
+# Purpose: lightweight base config + optional ad blocking
+# Do NOT put proxy subscription tokens, passwords, cookies, certificates, or private keys in this file.
+
+[General]
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.168.0.0/16,224.0.0.0/4,255.255.255.255/32
+dns-server = system,223.5.5.5,119.29.29.29
+allow-udp-proxy = false
+allow-wifi-access = false
+proxy-test-url = http://www.gstatic.com/generate_204
+test-timeout = 3
+
+[Proxy]
+# Keep empty for public cloud config. Add nodes/subscriptions locally in Loon, or use [Remote Proxy] with a private local-only profile.
+
+[Remote Proxy]
+# Do NOT commit real subscription URLs to a public repo.
+# Example only:
+# MySub = https://example.com/your-subscription-token
+
+[Proxy Group]
+# Default safe fallback. Replace/add your own node groups in Loon if needed.
+PROXY = select,DIRECT
+AdBlock = select,REJECT,DIRECT
+Final = select,PROXY,DIRECT
+
+[Remote Rule]
+# Lightweight self-maintained rule files. These URLs must be reachable by Loon.
+# If this repo is private, raw.githubusercontent.com links will usually NOT work in Loon.
+https://raw.githubusercontent.com/limelisest/loon-config/main/rules/reject.lsr,policy=AdBlock,enabled=true
+https://raw.githubusercontent.com/limelisest/loon-config/main/rules/proxy.lsr,policy=PROXY,enabled=true
+https://raw.githubusercontent.com/limelisest/loon-config/main/rules/direct.lsr,policy=DIRECT,enabled=true
+
+[Rule]
+# Mainland China direct, everything else follows Final group.
+GEOIP,CN,DIRECT
+FINAL,Final
+
+[Plugin]
+# Start with a tiny no-MITM/no-script ad plugin to avoid slowing apps.
+# If this repo is private, this raw URL will usually NOT work in Loon.
+https://raw.githubusercontent.com/limelisest/loon-config/main/plugins/ad-lite.lpx,tag=AdLite,enabled=true
+
+[MITM]
+enable = false
+hostname =
