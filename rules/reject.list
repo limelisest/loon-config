@@ -1,0 +1,6 @@
+# Lightweight reject rules. Remote rule files omit policy; policy is assigned in loon.conf.
+DOMAIN-SUFFIX,doubleclick.net
+DOMAIN-SUFFIX,googleadservices.com
+DOMAIN-SUFFIX,googlesyndication.com
+DOMAIN-SUFFIX,adnxs.com
+DOMAIN-SUFFIX,scorecardresearch.com

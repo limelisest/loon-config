@@ -1,0 +1,9 @@
+# Never commit local secrets
+*.p12
+*.mobileconfig
+*.key
+*.pem
+*.crt
+.env
+secrets.*
+local.*
