@@ -1,6 +1,10 @@
-# Lightweight reject rules. Remote rule files omit policy; policy is assigned in loon.conf.
+# Tiny local reject list. Avoid aggressive entries that make apps retry and slow startup.
+# For broader blocking, enable AdvertisingLite in loon.lcf after testing.
 DOMAIN-SUFFIX,doubleclick.net
 DOMAIN-SUFFIX,googleadservices.com
 DOMAIN-SUFFIX,googlesyndication.com
 DOMAIN-SUFFIX,adnxs.com
 DOMAIN-SUFFIX,scorecardresearch.com
+DOMAIN-SUFFIX,umeng.com
+DOMAIN-SUFFIX,umengcloud.com
+DOMAIN-SUFFIX,cnzz.com

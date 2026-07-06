@@ -1,9 +1,14 @@
-# Domains forced DIRECT. Keep small and personal.
-DOMAIN-SUFFIX,apple.com
-DOMAIN-SUFFIX,icloud.com
-DOMAIN-SUFFIX,mzstatic.com
+# Local DIRECT overrides. Remote rule files omit policy; policy is assigned in loon.lcf.
+# Keep this file small; broad domestic/vendor rules are referenced from upstream in loon.lcf.
+DOMAIN-SUFFIX,local
+DOMAIN-SUFFIX,lan
 DOMAIN-SUFFIX,qq.com
 DOMAIN-SUFFIX,weixin.qq.com
+DOMAIN-SUFFIX,gtimg.com
 DOMAIN-SUFFIX,taobao.com
 DOMAIN-SUFFIX,tmall.com
 DOMAIN-SUFFIX,alicdn.com
+DOMAIN-SUFFIX,alipay.com
+DOMAIN-SUFFIX,amap.com
+DOMAIN-SUFFIX,mi.com
+DOMAIN-SUFFIX,xiaomi.com

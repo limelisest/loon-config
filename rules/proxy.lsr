@@ -1,10 +1,12 @@
-# Domains commonly requiring PROXY. Keep small and personal.
-DOMAIN-SUFFIX,google.com
-DOMAIN-SUFFIX,googleapis.com
-DOMAIN-SUFFIX,gstatic.com
-DOMAIN-SUFFIX,youtube.com
-DOMAIN-SUFFIX,ytimg.com
-DOMAIN-SUFFIX,github.com
+# Local PROXY overrides. Remote rule files omit policy; policy is assigned in loon.lcf.
+# Put personal exceptions here when upstream ProxyLite does not catch them.
 DOMAIN-SUFFIX,githubusercontent.com
+DOMAIN-SUFFIX,githubassets.com
+DOMAIN-SUFFIX,raw.githubusercontent.com
 DOMAIN-SUFFIX,telegram.org
 DOMAIN-SUFFIX,t.me
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,gemini.google.com
