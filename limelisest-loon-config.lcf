@@ -150,3 +150,6 @@ https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.pl
 https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin, tag=WeatherKit[仅限iOS18及以上], enabled=true
 
 [Mitm]
+# BiliUniverse 等 HTTPS 脚本插件需要开启 MITM，并在 Loon 内安装/信任证书后才会生效。
+enable = true
+hostname = manga.bilibili.com, api.live.bilibili.com, api.vc.bilibili.com, app.bilibili.com, app.biliapi.net, api.bilibili.com, api.biliapi.net, grpc.biliapi.net, *.mcdn.bilivideo.cn, upos-sz-mirror*bstar1.bilivideo.com, upos-*-mirrorakam.akamaized.net

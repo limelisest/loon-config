@@ -29,6 +29,7 @@
   - BiliBili ADBlock: https://github.com/BiliUniverse/ADBlock/releases/latest/download/BiliBili.ADBlock.plugin
   - BiliBili Redirect: https://github.com/BiliUniverse/Redirect/releases/latest/download/BiliBili.Redirect.plugin
   - BiliBili Enhanced: https://github.com/BiliUniverse/Enhanced/releases/latest/download/BiliBili.Enhanced.plugin
+  - The BiliUniverse plugins contain `[Script]` and `[MitM]` entries for BiliBili HTTPS/gRPC endpoints, so the main config enables MITM and lists the BiliBili hostnames explicitly.
   - iRingo WeatherKit v2.0.1: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin
 
 ## Previous design references

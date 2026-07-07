@@ -38,7 +38,8 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 5. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
 6. Apple rules default to `DIRECT`.
 7. BiliBili plugin set uses BiliUniverse `ADBlock` / `Redirect` / `Enhanced`, enabled by default.
-8. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
+8. HTTPS script plugins need MITM: install and trust the Loon CA certificate on the device, then restart the target app.
+9. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
 ## Files
 
