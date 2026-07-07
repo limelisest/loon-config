@@ -24,9 +24,9 @@
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-without-asn.mmdb`
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb`
 - Icons from Koolson/Qure, Orz-3/mini, and lige47/QuanX-icon-rule.
-- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, NSRingo, and app2smile.
+- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, and NSRingo.
 - Added user-requested plugin references:
-  - BiliBili ad removal: https://raw.githubusercontent.com/app2smile/rules/master/plugin/bilibili.plugin
+  - BiliBili ad removal: https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx
   - iRingo WeatherKit v2.0.1: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin
 
 ## Previous design references
