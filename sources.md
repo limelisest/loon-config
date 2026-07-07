@@ -3,7 +3,7 @@
 ## Current copied base
 
 - Repcz/Tool Loon config: https://github.com/Repcz/Tool/blob/X/Loon/Loon.conf
-  - Raw URL copied into `limelisest-loon-config.lcf`: https://raw.githubusercontent.com/Repcz/Tool/X/Loon/Loon.conf
+  - Raw URL copied into `limelisest-loon-config.conf` and `limelisest-loon-config.lcf`: https://raw.githubusercontent.com/Repcz/Tool/X/Loon/Loon.conf
   - Upstream header reports last update: `2026-6-29 19:50`.
   - Upstream says it is based on iKeLee's Loon simple sample configuration.
   - License checked from upstream `LICENSE`: MIT License, Copyright (c) 2024 Repcz.
@@ -34,6 +34,11 @@ These were used by the old lightweight template and may still be useful when cus
 - Loon official/example config format: https://github.com/Loon0x00/LoonExampleConfig
 - blackmatrix7/ios_rule_script: https://github.com/blackmatrix7/ios_rule_script
 - luestr/ShuntRules: https://github.com/luestr/ShuntRules
+
+## Import notes
+
+- Loon's official scheme/unified-link manual says remote config import uses `loon://import?sub=encode(url)` / `https://www.nsloon.com/openloon/import?sub=encode(url)`, so README import links percent-encode the config URL.
+- `limelisest-loon-config.conf` is the recommended import target; `limelisest-loon-config.lcf` is kept as a compatibility copy.
 
 ## Maintenance notes
 
