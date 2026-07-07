@@ -35,10 +35,10 @@ This config references popular upstream rules directly instead of copying them:
 Node names are auto-classified by `[Remote Filter]` into:
 
 - Region groups: `HK`, `JP`, `US`, `SG`, `TW`, `KR`
-- Base groups: `Fallback`, `Manual`, `Auto`
+- Base groups: `兜底后备`, `自动选择`
 - Service groups: `AI`, `GitHub`, `Telegram`, `Streaming`, `Apple`, `Microsoft`, `Game`
 
-Service groups use the same pattern: first option is `Fallback`, second option is `Manual`.
+`兜底后备` itself is a manual `select` group. Its first/default option is `自动选择`; there is no separate `Manual` group.
 Individual rules stay separate, but rules of the same category use the same policy group. For example:
 
 - `OpenAI`, `Anthropic`, `Gemini` -> `AI`
