@@ -34,9 +34,15 @@ This config references popular upstream rules directly instead of copying them:
 
 Node names are auto-classified by `[Remote Filter]` into:
 
-- `HK`, `JP`, `US`, `SG`, `TW`, `KR`
-- `Auto`, `Manual`, `Fallback`
-- `AI` and `Gemini` default to `JP`, then `US` / `SG` / `HK` / `PROXY`
+- Region groups: `HK`, `JP`, `US`, `SG`, `TW`, `KR`
+- Base groups: `Fallback`, `Manual`, `Auto`
+- Service groups: `AI`, `GitHub`, `Telegram`, `Streaming`, `Apple`, `Microsoft`, `Game`
+
+Service groups use the same pattern: first option is `Fallback`, second option is `Manual`.
+Individual rules stay separate, but rules of the same category use the same policy group. For example:
+
+- `OpenAI`, `Anthropic`, `Gemini` -> `AI`
+- `YouTube`, `Netflix`, `Disney`, `Spotify`, `TikTok` -> `Streaming`
 
 After importing, add your proxy subscription/nodes in Loon, then check whether each region group has matched nodes.
 

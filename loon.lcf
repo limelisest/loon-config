@@ -34,10 +34,10 @@ Game_Filter = NameRegex, FilterKey = "(?i)(游戏|GAME|Game|🎮)"
 
 [Proxy Group]
 # Base selectors.
-PROXY = select,Auto,Manual,HK,JP,US,SG,TW,KR,DIRECT
+PROXY = select,Fallback,Manual,Auto,HK,JP,US,SG,TW,KR,DIRECT
 Manual = select,ALL_Filter,DIRECT
 Auto = url-test,ALL_Filter,url = http://www.gstatic.com/generate_204,interval = 600
-Fallback = fallback,HK,JP,US,SG,TW,KR,url = http://www.gstatic.com/generate_204,interval = 600,max-timeout = 3000
+Fallback = fallback,ALL_Filter,url = http://www.gstatic.com/generate_204,interval = 600,max-timeout = 3000
 
 # Region auto groups.
 HK = url-test,HK_Filter,url = http://www.gstatic.com/generate_204,interval = 600
@@ -46,18 +46,17 @@ US = url-test,US_Filter,url = http://www.gstatic.com/generate_204,interval = 600
 SG = url-test,SG_Filter,url = http://www.gstatic.com/generate_204,interval = 600
 TW = url-test,TW_Filter,url = http://www.gstatic.com/generate_204,interval = 600
 KR = url-test,KR_Filter,url = http://www.gstatic.com/generate_204,interval = 600
-Game = select,Game_Filter,PROXY,Auto,DIRECT
+Game = select,Fallback,Manual,Game_Filter,Auto,DIRECT
 
-# Service selectors. AI/Gemini default to JP as requested.
-AI = select,JP,US,SG,HK,PROXY,DIRECT
-Gemini = select,JP,US,SG,HK,PROXY,DIRECT
-GitHub = select,PROXY,HK,JP,US,SG,DIRECT
-Telegram = select,PROXY,HK,SG,JP,US,DIRECT
-Streaming = select,PROXY,HK,JP,US,SG,TW,DIRECT
-Apple = select,DIRECT,PROXY
-Microsoft = select,DIRECT,PROXY
+# Service selectors. First option is fallback, second option is manual selection.
+AI = select,Fallback,Manual,JP,US,SG,HK,DIRECT
+GitHub = select,Fallback,Manual,HK,JP,US,SG,DIRECT
+Telegram = select,Fallback,Manual,HK,SG,JP,US,DIRECT
+Streaming = select,Fallback,Manual,HK,JP,US,SG,TW,DIRECT
+Apple = select,Fallback,Manual,DIRECT
+Microsoft = select,Fallback,Manual,DIRECT
 AdBlock = select,REJECT,DIRECT
-Final = select,PROXY,Auto,DIRECT
+Final = select,Fallback,Manual,Auto,DIRECT
 
 [Remote Rule]
 # Local overrides first. These files are tiny and owned by this repository.
@@ -83,7 +82,7 @@ https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Google
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/OpenAI/OpenAI.list, policy=AI, tag=OpenAI, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Anthropic/Anthropic.list, policy=AI, tag=Anthropic, enabled=true
-https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Gemini/Gemini.list, policy=Gemini, tag=Gemini, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Gemini/Gemini.list, policy=AI, tag=Gemini, enabled=true
 
 # Streaming / media.
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/YouTube/YouTube.list, policy=Streaming, tag=YouTube, enabled=true
