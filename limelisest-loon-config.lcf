@@ -56,7 +56,7 @@ TW = NameRegex, FilterKey = "(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)"
 
 # 分流策略组：规则按类别进入对应策略，默认都先走「兜底后备」
 Streaming = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-二次元 = select,Japan,兜底后备,HongKong,United States,Singapore,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+Pixiv/booth/fanbox = select,Japan,兜底后备,HongKong,United States,Singapore,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
 Microsoft = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
 Google = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
 AI = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
@@ -88,7 +88,7 @@ https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Telegr
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Twitter/Twitter.list, policy=Social, tag=Twitter, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Facebook/Facebook.list, policy=Social, tag=Facebook, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/TikTok/TikTok.list, policy=Social, tag=TikTok, enabled=true
-https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Pixiv/Pixiv.list, policy=二次元, tag=Pixiv_BOOTH_FANBOX, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Pixiv/Pixiv.list, policy=Pixiv/booth/fanbox, tag=Pixiv_BOOTH_FANBOX, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Steam/Steam.list, policy=Game, tag=Steam, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Epic/Epic.list, policy=Game, tag=Epic, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/YouTube/YouTube.list, policy=Google, tag=YouTube, enabled=true

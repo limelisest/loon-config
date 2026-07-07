@@ -15,7 +15,8 @@
   - Repository: https://github.com/blackmatrix7/ios_rule_script
   - Used because it provides native Loon rule paths and maintained category rules.
   - AI is split into `OpenAI`, `Anthropic`, and `Gemini`, all using policy `AI`.
-  - Pixiv / BOOTH / FANBOX uses upstream `Pixiv/Pixiv.list`, which contains `booth.pm`, `fanbox.cc`, `pixiv.*`, and `pximg.net`, all using policy `二次元`.
+  - Pixiv / BOOTH / FANBOX uses upstream `Pixiv/Pixiv.list`, which contains `booth.pm`, `fanbox.cc`, `pixiv.*`, and `pximg.net`, all using policy `Pixiv/booth/fanbox`.
+  - Pixiv policy icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
   - Apple rules use policy `DIRECT`.
   - Ad blocking uses `AdvertisingLite` and `Hijacking`.
 - Base config source remains Repcz/Tool; plugin URLs inherited from the copied base remain unchanged except user-requested edits.

@@ -34,8 +34,8 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 1. Add your proxy subscription/nodes locally in Loon or under `[Remote Proxy]` if you publish privately.
 2. Check `[Remote Filter]` node matching: `HK`, `US`, `SG`, `JP`, `TW`.
 3. Tune `[Proxy Group]`: `兜底后备` is the only base manual selector, and its default first option is `自动选择`.
-4. Category groups such as `AI`, `Streaming`, `Telegram`, and `二次元` point to their preferred default first, then fallback choices.
-5. `二次元` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
+4. Category groups such as `AI`, `Streaming`, `Telegram`, and `Pixiv/booth/fanbox` point to their preferred default first, then fallback choices.
+5. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
 6. Apple rules default to `DIRECT`.
 7. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
