@@ -40,7 +40,7 @@ https://www.nsloon.com/openloon/import?sub=https%3A%2F%2Fraw.githubusercontent.c
 
 1. Add your proxy subscription/nodes locally in Loon or under `[Remote Proxy]` if you publish privately.
 2. Check `[Remote Filter]` node matching: `HK`, `US`, `SG`, `JP`, `TW`.
-3. Tune `[Proxy Group]` defaults, especially `Manual`, `Global`, `AI`, `Streaming`, `Telegram`, and `Final`.
+3. Tune `[Proxy Group]` defaults: `兜底后备` is the only base manual selector, and its default first option is `自动选择`. Category groups such as `AI`, `Streaming`, and `Telegram` point to `兜底后备` first.
 4. Review `[Remote Rule]`: rules are sourced from `blackmatrix7/ios_rule_script`; AI is split into `OpenAI` / `Anthropic` / `Gemini`, and ad blocking uses `AdvertisingLite` + `Hijacking`.
 5. Review `[Plugin]`: this base enables many plugin/ad-removal entries by default, including `whatshub.top` YouTube and `iRingo WeatherKit v2.0.1`. Disable entries you do not need if an app breaks.
 6. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
