@@ -1,6 +1,6 @@
 # Loon cloud config template (.lcf)
 # Maintainer: limelisest
-# Purpose: lightweight base config + popular upstream routing rules by reference
+# Purpose: node auto categorization + lightweight routing rules by reference
 # Do NOT put proxy subscription tokens, passwords, cookies, certificates, or private keys in this file.
 
 [General]
@@ -10,6 +10,7 @@ dns-server = system,223.5.5.5,119.29.29.29
 allow-udp-proxy = false
 allow-wifi-access = false
 proxy-test-url = http://www.gstatic.com/generate_204
+internet-test-url = http://connectivitycheck.platform.hicloud.com/generate_204
 test-timeout = 3
 
 [Proxy]
@@ -21,58 +22,78 @@ test-timeout = 3
 # MySub = https://example.com/your-subscription-token
 
 [Remote Filter]
-# Match all nodes from subscriptions you add locally/remotely in Loon.
-ALL = NameRegex, FilterKey = ".*"
+# Auto-classify nodes by common names/emoji. Exclude traffic/info/official notice entries.
+ALL_Filter = NameRegex, FilterKey = "^(?=.*(.))(?!.*((?i)官网|网址|订阅|流量|到期|剩余|过期|套餐|重置|客服|邮箱|工单|通知|公告|频道|群|邀请|返利|Traffic|Expire|Use|Used|Total|Reset|官网|地址)).*$"
+HK_Filter = NameRegex, FilterKey = "(?i)(🇭🇰|香港|港|HK|HKG|Hong Kong|HongKong)"
+JP_Filter = NameRegex, FilterKey = "(?i)(🇯🇵|日本|日|东京|大阪|埼玉|JP|JPN|Japan|Tokyo|Osaka)"
+US_Filter = NameRegex, FilterKey = "(?i)(🇺🇸|美国|美|洛杉矶|圣何塞|西雅图|纽约|达拉斯|US|USA|United States|America|Los Angeles|Seattle|New York)"
+SG_Filter = NameRegex, FilterKey = "(?i)(🇸🇬|新加坡|狮城|坡|SG|SGP|Singapore)"
+TW_Filter = NameRegex, FilterKey = "(?i)(🇹🇼|台湾|台|TW|TWN|Taiwan)"
+KR_Filter = NameRegex, FilterKey = "(?i)(🇰🇷|韩国|韩|首尔|KR|KOR|Korea|Seoul)"
+Game_Filter = NameRegex, FilterKey = "(?i)(游戏|GAME|Game|🎮)"
 
 [Proxy Group]
-# Base groups. If no subscription is added, DIRECT remains available as a safe fallback.
-PROXY = select,Manual,Auto,DIRECT
-Manual = select,ALL,DIRECT
-Auto = url-test,ALL,interval = 600
+# Base selectors.
+PROXY = select,Auto,Manual,HK,JP,US,SG,TW,KR,DIRECT
+Manual = select,ALL_Filter,DIRECT
+Auto = url-test,ALL_Filter,url = http://www.gstatic.com/generate_204,interval = 600
+Fallback = fallback,HK,JP,US,SG,TW,KR,url = http://www.gstatic.com/generate_204,interval = 600,max-timeout = 3000
 
-# Service groups. Keep them separate so slow/broken services can be switched without changing rules.
-AI = select,PROXY,Manual,Auto,DIRECT
-GitHub = select,PROXY,Manual,Auto,DIRECT
-Telegram = select,PROXY,Manual,Auto,DIRECT
-Streaming = select,PROXY,Manual,Auto,DIRECT
+# Region auto groups.
+HK = url-test,HK_Filter,url = http://www.gstatic.com/generate_204,interval = 600
+JP = url-test,JP_Filter,url = http://www.gstatic.com/generate_204,interval = 600
+US = url-test,US_Filter,url = http://www.gstatic.com/generate_204,interval = 600
+SG = url-test,SG_Filter,url = http://www.gstatic.com/generate_204,interval = 600
+TW = url-test,TW_Filter,url = http://www.gstatic.com/generate_204,interval = 600
+KR = url-test,KR_Filter,url = http://www.gstatic.com/generate_204,interval = 600
+Game = select,Game_Filter,PROXY,Auto,DIRECT
+
+# Service selectors. AI/Gemini default to JP as requested.
+AI = select,JP,US,SG,HK,PROXY,DIRECT
+Gemini = select,JP,US,SG,HK,PROXY,DIRECT
+GitHub = select,PROXY,HK,JP,US,SG,DIRECT
+Telegram = select,PROXY,HK,SG,JP,US,DIRECT
+Streaming = select,PROXY,HK,JP,US,SG,TW,DIRECT
 Apple = select,DIRECT,PROXY
 Microsoft = select,DIRECT,PROXY
 AdBlock = select,REJECT,DIRECT
-Final = select,PROXY,DIRECT
+Final = select,PROXY,Auto,DIRECT
 
 [Remote Rule]
 # Local overrides first. These files are tiny and owned by this repository.
-https://raw.githubusercontent.com/limelisest/loon-config/main/rules/reject.lsr, policy=AdBlock, tag=LocalReject, enabled=true
-https://raw.githubusercontent.com/limelisest/loon-config/main/rules/direct.lsr, policy=DIRECT, tag=LocalDirect, enabled=true
-https://raw.githubusercontent.com/limelisest/loon-config/main/rules/proxy.lsr, policy=PROXY, tag=LocalProxy, enabled=true
+https://limelisest.github.io/loon-config/rules/reject.lsr, policy=AdBlock, tag=LocalReject, enabled=true
+https://limelisest.github.io/loon-config/rules/direct.lsr, policy=DIRECT, tag=LocalDirect, enabled=true
+https://limelisest.github.io/loon-config/rules/proxy.lsr, policy=PROXY, tag=LocalProxy, enabled=true
 
 # Popular upstream rules, referenced directly instead of copied.
 # Source: blackmatrix7/ios_rule_script https://github.com/blackmatrix7/ios_rule_script
-# Keep AdvertisingLite disabled by default; enable it only if the tiny local reject list is not enough.
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/AdvertisingLite/AdvertisingLite.list, policy=AdBlock, tag=AdvertisingLite, enabled=false
+# jsDelivr is used here to reduce first-import failures caused by raw.githubusercontent.com access.
+# Keep AdvertisingLite disabled by default; enable it only after routing is stable.
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AdvertisingLite/AdvertisingLite.list, policy=AdBlock, tag=AdvertisingLite, enabled=false
 
 # Direct / domestic / vendor rules.
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Direct/Direct.list, policy=DIRECT, tag=Direct, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/China/China.list, policy=DIRECT, tag=China, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple.list, policy=Apple, tag=Apple, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Direct/Direct.list, policy=DIRECT, tag=Direct, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/China/China.list, policy=DIRECT, tag=China, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Apple/Apple.list, policy=Apple, tag=Apple, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
 
 # Developer / communication / AI.
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GitHub/GitHub.list, policy=GitHub, tag=GitHub, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/OpenAI/OpenAI.list, policy=AI, tag=OpenAI, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Anthropic/Anthropic.list, policy=AI, tag=Anthropic, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Gemini/Gemini.list, policy=AI, tag=Gemini, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/GitHub/GitHub.list, policy=GitHub, tag=GitHub, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Google/Google.list, policy=PROXY, tag=Google, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/OpenAI/OpenAI.list, policy=AI, tag=OpenAI, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Anthropic/Anthropic.list, policy=AI, tag=Anthropic, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Gemini/Gemini.list, policy=Gemini, tag=Gemini, enabled=true
 
 # Streaming / media.
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/YouTube/YouTube.list, policy=Streaming, tag=YouTube, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Netflix/Netflix.list, policy=Streaming, tag=Netflix, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Disney/Disney.list, policy=Streaming, tag=Disney, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Spotify/Spotify.list, policy=Streaming, tag=Spotify, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TikTok/TikTok.list, policy=Streaming, tag=TikTok, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/YouTube/YouTube.list, policy=Streaming, tag=YouTube, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Netflix/Netflix.list, policy=Streaming, tag=Netflix, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Disney/Disney.list, policy=Streaming, tag=Disney, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Spotify/Spotify.list, policy=Streaming, tag=Spotify, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/TikTok/TikTok.list, policy=Streaming, tag=TikTok, enabled=true
 
 # General proxy fallback. ProxyLite is preferred over huge all-in-one lists for this starter config.
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ProxyLite/ProxyLite.list, policy=PROXY, tag=ProxyLite, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ProxyLite/ProxyLite.list, policy=PROXY, tag=ProxyLite, enabled=true
 
 [Rule]
 # Mainland China direct, everything else follows Final group.
@@ -81,8 +102,8 @@ FINAL,Final
 
 [Plugin]
 # Disabled by default while tuning routing performance. Enable only when rules are stable.
-https://raw.githubusercontent.com/limelisest/loon-config/main/plugins/ad-lite.lpx, tag=AdLite, enabled=false
+https://limelisest.github.io/loon-config/plugins/ad-lite.lpx, enabled=false
 
-[MITM]
+[Mitm]
 enable = false
 hostname =

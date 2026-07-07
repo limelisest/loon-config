@@ -4,42 +4,48 @@ A lightweight Loon cloud configuration template.
 
 ## Import
 
-Recommended current Loon config file:
+Recommended import URL, served by GitHub Pages:
 
 ```text
-https://raw.githubusercontent.com/limelisest/loon-config/main/loon.lcf
+https://limelisest.github.io/loon-config/loon.lcf
 ```
 
 Loon URL scheme import link:
 
 ```text
-https://www.nsloon.com/openloon/import?sub=https://raw.githubusercontent.com/limelisest/loon-config/main/loon.lcf
+https://www.nsloon.com/openloon/import?sub=https://limelisest.github.io/loon-config/loon.lcf
+```
+
+Raw GitHub fallback:
+
+```text
+https://raw.githubusercontent.com/limelisest/loon-config/main/loon.lcf
 ```
 
 ## Routing design
 
-This starter config references popular upstream rules directly instead of copying them:
+This config references popular upstream rules directly instead of copying them:
 
-- `blackmatrix7/ios_rule_script` for Apple, Microsoft, GitHub, Telegram, AI, streaming, China, Direct, and ProxyLite rules.
+- `blackmatrix7/ios_rule_script` via jsDelivr CDN for Apple, Microsoft, GitHub, Google, Telegram, AI, streaming, China, Direct, and ProxyLite rules.
 - Local `rules/*.lsr` files are only small personal overrides.
-- `AdvertisingLite` is included but disabled by default to avoid app startup slowdowns while testing.
+- `AdvertisingLite` and the local ad plugin are included but disabled by default to avoid app startup slowdowns while testing.
 
-Policy groups:
+## Node automation
 
-- `PROXY`: default proxy selector
-- `Manual` / `Auto`: node selection helpers
-- `AI`, `GitHub`, `Telegram`, `Streaming`: service-specific selectors
-- `Apple`, `Microsoft`: default to `DIRECT`, can switch to proxy if needed
-- `AdBlock`: `REJECT` or `DIRECT`
-- `Final`: fallback group
+Node names are auto-classified by `[Remote Filter]` into:
+
+- `HK`, `JP`, `US`, `SG`, `TW`, `KR`
+- `Auto`, `Manual`, `Fallback`
+- `AI` and `Gemini` default to `JP`, then `US` / `SG` / `HK` / `PROXY`
+
+After importing, add your proxy subscription/nodes in Loon, then check whether each region group has matched nodes.
 
 ## Important
 
 - Do **not** commit proxy subscription URLs, node passwords, cookies, MITM certificates, or private keys.
 - Loon cloud import needs URLs that the app can fetch directly.
-- This repo is public so Loon can fetch the raw files directly.
+- This repo is public so Loon can fetch the config and local override files directly.
 - Keep nodes/subscriptions local in Loon unless you are using a private publishing pipeline.
-- After importing the cloud config, add your proxy subscription/nodes in Loon, then select policies in the groups above.
 
 ## Files
 
