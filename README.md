@@ -37,7 +37,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 4. Category groups such as `AI`, `Streaming`, `Telegram`, and `Pixiv/booth/fanbox` point to their preferred default first, then fallback choices.
 5. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
 6. Apple rules default to `DIRECT`.
-7. BiliBili plugin set uses BiliUniverse `ADBlock`, enabled by default.
+7. BiliBili ad removal uses app2smile `bilibili.plugin`, enabled by default; it is a lighter plugin intended to avoid comment loading issues.
 8. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
 ## Files
