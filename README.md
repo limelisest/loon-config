@@ -5,7 +5,7 @@ A Loon cloud configuration based on a mature upstream template.
 ## Current base
 
 - Upstream config: `Repcz/Tool` → `Tool/X/Loon/Loon.conf`
-- Upstream author header is preserved in `limelisest-loon-config.lcf` / `loon.lcf` / `loon.conf`.
+- Upstream author header is preserved in `limelisest-loon-config.lcf`.
 - Loon requirement noted by upstream: `Loon Version ≥ 3.2.3`.
 
 ## Import
@@ -28,12 +28,6 @@ Raw GitHub fallback:
 https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-config.lcf
 ```
 
-Previous compatibility URL still exists:
-
-```text
-https://limelisest.github.io/loon-config/loon.lcf
-```
-
 ## What to change first
 
 1. Add your proxy subscription/nodes locally in Loon or under `[Remote Proxy]` if you publish privately.
@@ -45,7 +39,5 @@ https://limelisest.github.io/loon-config/loon.lcf
 ## Files
 
 - `limelisest-loon-config.lcf`: main cloud config for current Loon versions
-- `loon.lcf`: compatibility copy for the previous import URL
-- `loon.conf`: compatibility copy
 - `sources.md`: upstream/source tracking
-- `backups/`: local backup copies created before replacing the old template
+- `LICENSE`: repository license
