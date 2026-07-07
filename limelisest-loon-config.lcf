@@ -93,6 +93,8 @@ https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/YouTub
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Google/Google.list, policy=Google, tag=Google, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/GitHub/GitHub.list, policy=Microsoft, tag=GitHub, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Apple/Apple.list, policy=DIRECT, tag=Apple, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleProxy/AppleProxy.list, policy=DIRECT, tag=AppleProxy, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Emby/Emby.list, policy=Emby, tag=Emby, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Spotify/Spotify.list, policy=Spotify, tag=Spotify, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Bahamut/Bahamut.list, policy=Streaming, tag=Bahamut, enabled=true
@@ -101,7 +103,6 @@ https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Disney
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/PrimeVideo/PrimeVideo.list, policy=Streaming, tag=PrimeVideo, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/HBO/HBO.list, policy=Streaming, tag=HBO, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Proxy/Proxy.list, policy=兜底后备, tag=Proxy, enabled=true
-https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleProxy/AppleProxy.list, policy=HongKong, tag=AppleProxy, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Lan/Lan.list, policy=DIRECT, tag=LAN, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/China/China.list, policy=DIRECT, tag=China, enabled=true
 
@@ -142,7 +143,6 @@ https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true
 
 https://github.com/DualSubs/Spotify/releases/latest/download/DualSubs.Spotify.plugin, enabled=true
 https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.plugin, enabled=true
-https://whatshub.top/plugin/youtube.plugin, tag=YouTube去广告, enabled=true
 https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin, tag=WeatherKit[仅限iOS18及以上], enabled=true
 
 [Mitm]

@@ -21,10 +21,9 @@
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-without-asn.mmdb`
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb`
 - Icons from Koolson/Qure, Orz-3/mini, and lige47/QuanX-icon-rule.
-- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, NSRingo, and whatshub.top.
+- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, and NSRingo.
 - Previous Repcz remote-rule URLs were replaced by blackmatrix7 equivalents where available; no Repcz rule-list URL remains in `[Remote Rule]`.
 - Added user-requested plugin references:
-  - YouTube plugin: https://whatshub.top/plugin/youtube.plugin
   - iRingo WeatherKit v2.0.1: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin
 
 ## Previous design references
