@@ -3,7 +3,7 @@
 ## Current copied base
 
 - Repcz/Tool Loon config: https://github.com/Repcz/Tool/blob/X/Loon/Loon.conf
-  - Raw URL copied into `loon.lcf` and `loon.conf`: https://raw.githubusercontent.com/Repcz/Tool/X/Loon/Loon.conf
+  - Raw URL copied into `limelisest-loon-config.lcf`, `loon.lcf`, and `loon.conf`: https://raw.githubusercontent.com/Repcz/Tool/X/Loon/Loon.conf
   - Upstream header reports last update: `2026-6-29 19:50`.
   - Upstream says it is based on iKeLee's Loon simple sample configuration.
   - License checked from upstream `LICENSE`: MIT License, Copyright (c) 2024 Repcz.
@@ -17,7 +17,10 @@
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-without-asn.mmdb`
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb`
 - Icons from Koolson/Qure, Orz-3/mini, and lige47/QuanX-icon-rule.
-- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, and NSRingo.
+- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, NSRingo, and whatshub.top.
+- Added user-requested plugin references:
+  - YouTube plugin: https://whatshub.top/plugin/youtube.plugin
+  - iRingo WeatherKit v2.0.1: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin
 
 ## Previous design references
 

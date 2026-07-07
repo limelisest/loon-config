@@ -1,3 +1,4 @@
+# NAME: limelisest-loon-config
 # Author:https://github.com/Repcz
 # TG:https://t.me/LUCYChannel_1024
 # 最后更新时间: 2026-6-29 19:50
@@ -137,6 +138,7 @@ https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true
 
 https://github.com/DualSubs/Spotify/releases/latest/download/DualSubs.Spotify.plugin, enabled=true
 https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.plugin, enabled=true
-https://github.com/NSRingo/WeatherKit/releases/latest/download/iRingo.WeatherKit.plugin, tag=WeatherKit[仅限iOS18及以上], enabled=false
+https://whatshub.top/plugin/youtube.plugin, tag=YouTube去广告, enabled=true
+https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin, tag=WeatherKit[仅限iOS18及以上], enabled=true
 
 [Mitm]
