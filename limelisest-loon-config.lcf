@@ -76,30 +76,34 @@ Taiwan = url-test,TW,url = http://1.1.1.1/generate_204,interval = 300,tolerance 
 FINAL,Final
 
 [Remote Rule]
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Direct.list, policy = DIRECT, tag = Direct, enabled = true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Reject.list, policy = REJECT, tag = Reject, enabled = true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/AI.list, policy=AI, tag=AI, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Twitter.list, policy=Social, tag=Twitter, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Facebook.list, policy=Social, tag=Facebook, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/TikTok.list, policy=Social, tag=TikTok, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Steam.list, policy=Game, tag=Steam, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Epic.list, policy=Game, tag=Epic, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/YouTube.list, policy=Google, tag=Youtube, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Google.list, policy=Google, tag=Google, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Github.list, policy=Microsoft, tag=Github, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Emby.list, policy=Emby, tag=Emby, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Spotify.list, policy=Spotify, tag=Spotify, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Bahamut.list, policy=Streaming, tag=Bahamut, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Netflix.list, policy=Streaming, tag=Netflix, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Disney.list, policy=Streaming, tag=Disney, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/PrimeVideo.list, policy=Streaming, tag=PrimeVideo, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/HBO.list, policy=Streaming, tag=HBO, enabled=true
-https://github.com/Repcz/Tool/raw/X/Surge/Rules/Proxy.list, policy=Global, tag=Proxy, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/AppleServers.list, policy=HongKong, tag=AppleServers, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/Lan.list, policy=DIRECT, tag=LAN, enabled=true
-https://github.com/Repcz/Tool/raw/X/Loon/Rules/FILTER_REGION.list, policy=DIRECT, tag=CN, enabled=true
+# Primary rule source: blackmatrix7/ios_rule_script Loon rules.
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Direct/Direct.list, policy=DIRECT, tag=Direct, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AdvertisingLite/AdvertisingLite.list, policy=REJECT, tag=AdvertisingLite, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Hijacking/Hijacking.list, policy=REJECT, tag=Hijacking, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/OpenAI/OpenAI.list, policy=AI, tag=OpenAI, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Anthropic/Anthropic.list, policy=AI, tag=Anthropic, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Gemini/Gemini.list, policy=AI, tag=Gemini, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Twitter/Twitter.list, policy=Social, tag=Twitter, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Facebook/Facebook.list, policy=Social, tag=Facebook, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/TikTok/TikTok.list, policy=Social, tag=TikTok, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Steam/Steam.list, policy=Game, tag=Steam, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Epic/Epic.list, policy=Game, tag=Epic, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/YouTube/YouTube.list, policy=Google, tag=YouTube, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Google/Google.list, policy=Google, tag=Google, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/GitHub/GitHub.list, policy=Microsoft, tag=GitHub, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Emby/Emby.list, policy=Emby, tag=Emby, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Spotify/Spotify.list, policy=Spotify, tag=Spotify, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Bahamut/Bahamut.list, policy=Streaming, tag=Bahamut, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Netflix/Netflix.list, policy=Streaming, tag=Netflix, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Disney/Disney.list, policy=Streaming, tag=Disney, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/PrimeVideo/PrimeVideo.list, policy=Streaming, tag=PrimeVideo, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/HBO/HBO.list, policy=Streaming, tag=HBO, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Proxy/Proxy.list, policy=Global, tag=Proxy, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AppleProxy/AppleProxy.list, policy=HongKong, tag=AppleProxy, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Lan/Lan.list, policy=DIRECT, tag=LAN, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/China/China.list, policy=DIRECT, tag=China, enabled=true
 
 [Host]
 # App Store 下载请求解析 金山CDN
