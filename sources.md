@@ -1,34 +1,34 @@
 # Sources
 
-This template is self-maintained and intentionally lightweight.
+## Current copied base
 
-## Referenced upstream projects
+- Repcz/Tool Loon config: https://github.com/Repcz/Tool/blob/X/Loon/Loon.conf
+  - Raw URL copied into `loon.lcf` and `loon.conf`: https://raw.githubusercontent.com/Repcz/Tool/X/Loon/Loon.conf
+  - Upstream header reports last update: `2026-6-29 19:50`.
+  - Upstream says it is based on iKeLee's Loon simple sample configuration.
+  - License checked from upstream `LICENSE`: MIT License, Copyright (c) 2024 Repcz.
+  - The upstream author/TG/update header is preserved in the copied config.
+
+## Upstream resources referenced by the copied config
+
+- Repcz rule lists under `https://github.com/Repcz/Tool/raw/X/Loon/Rules/...`
+- Repcz Surge proxy list: `https://github.com/Repcz/Tool/raw/X/Surge/Rules/Proxy.list`
+- Loyalsoldier GeoIP / ASN databases:
+  - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-without-asn.mmdb`
+  - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb`
+- Icons from Koolson/Qure, Orz-3/mini, and lige47/QuanX-icon-rule.
+- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, and NSRingo.
+
+## Previous design references
+
+These were used by the old lightweight template and may still be useful when customizing:
 
 - Loon official/example config format: https://github.com/Loon0x00/LoonExampleConfig
-- Example LCF/filter configurations reviewed:
-  - https://github.com/eulac-dev/Proxy/blob/main/Loon/config/loon.lcf
-  - https://github.com/wsyangzy/proxy-scripts/blob/main/loon.lcf
 - blackmatrix7/ios_rule_script: https://github.com/blackmatrix7/ios_rule_script
-  - License: GPL-2.0 as reported by GitHub repository metadata.
-  - Usage here: direct CDN/raw URL references in `loon.lcf`; upstream rule contents are not copied into this repository.
-  - Referenced categories: `AdvertisingLite` (disabled), `Direct`, `China`, `Apple`, `Microsoft`, `GitHub`, `Google`, `Telegram`, `OpenAI`, `Anthropic`, `Gemini`, `YouTube`, `Netflix`, `Disney`, `Spotify`, `TikTok`, `ProxyLite`.
 - luestr/ShuntRules: https://github.com/luestr/ShuntRules
-  - Used as a design reference for merged `.lsr`-style Loon rule organization.
-  - Its README states the data source is `blackmatrix7/ios_rule_script`.
 
-## CDN / import notes
+## Maintenance notes
 
-- Main config is served from GitHub Pages: `https://limelisest.github.io/loon-config/loon.lcf`.
-- Upstream rules use jsDelivr URLs such as `https://cdn.jsdelivr.net/gh/...` to reduce first-import failures caused by `raw.githubusercontent.com` access.
-- Local override rules/plugins are served from GitHub Pages.
-
-## Licensing / maintenance notes
-
-- Prefer referencing upstream URLs instead of copying content.
-- Record upstream project, URL, license, and reason for inclusion.
-- Avoid large all-in-one MITM/script plugins unless enabled per app.
-- Keep local `rules/*.lsr` files small and reserved for personal overrides.
-
-## General references
-
-- GitHub licensing guidance: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository
+- Keep subscription URLs, node passwords, cookies, MITM certificates, and private keys out of this public repository.
+- If plugin behavior causes breakage, disable the relevant `[Plugin]` line first, then test again.
+- If this config is republished publicly, preserve upstream attribution and license notices.

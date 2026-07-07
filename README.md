@@ -1,6 +1,12 @@
 # loon-config
 
-A lightweight Loon cloud configuration template.
+A Loon cloud configuration based on a mature upstream template.
+
+## Current base
+
+- Upstream config: `Repcz/Tool` → `Tool/X/Loon/Loon.conf`
+- Upstream author header is preserved in `loon.lcf` / `loon.conf`.
+- Loon requirement noted by upstream: `Loon Version ≥ 3.2.3`.
 
 ## Import
 
@@ -22,43 +28,17 @@ Raw GitHub fallback:
 https://raw.githubusercontent.com/limelisest/loon-config/main/loon.lcf
 ```
 
-## Routing design
+## What to change first
 
-This config references popular upstream rules directly instead of copying them:
-
-- `blackmatrix7/ios_rule_script` via jsDelivr CDN for Apple, Microsoft, GitHub, Google, Telegram, AI, streaming, China, Direct, and ProxyLite rules.
-- Local `rules/*.lsr` files are only small personal overrides.
-- `AdvertisingLite` and the local ad plugin are included but disabled by default to avoid app startup slowdowns while testing.
-
-## Node automation
-
-Node names are auto-classified by `[Remote Filter]` into:
-
-- Region groups: `HK`, `JP`, `US`, `SG`, `TW`, `KR`
-- Base groups: `兜底后备`, `自动选择`
-- Service groups: `AI`, `GitHub`, `Telegram`, `Streaming`, `Apple`, `Microsoft`, `Game`
-
-`兜底后备` itself is a manual `select` group. Its first/default option is `自动选择`; there is no separate `Manual` group.
-Individual rules stay separate, but rules of the same category use the same policy group. For example:
-
-- `OpenAI`, `Anthropic`, `Gemini` -> `AI`
-- `YouTube`, `Netflix`, `Disney`, `Spotify`, `TikTok` -> `Streaming`
-
-After importing, add your proxy subscription/nodes in Loon, then check whether each region group has matched nodes.
-
-## Important
-
-- Do **not** commit proxy subscription URLs, node passwords, cookies, MITM certificates, or private keys.
-- Loon cloud import needs URLs that the app can fetch directly.
-- This repo is public so Loon can fetch the config and local override files directly.
-- Keep nodes/subscriptions local in Loon unless you are using a private publishing pipeline.
+1. Add your proxy subscription/nodes locally in Loon or under `[Remote Proxy]` if you publish privately.
+2. Check `[Remote Filter]` node matching: `HK`, `US`, `SG`, `JP`, `TW`.
+3. Tune `[Proxy Group]` defaults, especially `Manual`, `Global`, `AI`, `Streaming`, `Telegram`, and `Final`.
+4. Review `[Plugin]`: this base enables many plugin/ad-removal entries by default. Disable entries you do not need if an app breaks.
+5. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
 ## Files
 
 - `loon.lcf`: main cloud config for current Loon versions
-- `loon.conf`: compatibility copy for older naming habits
-- `plugins/ad-lite.lpx`: tiny no-MITM/no-script ad starter, disabled by default
-- `plugins/ad-lite.plugin`: compatibility copy
-- `rules/*.lsr`: lightweight local override rules for current Loon naming
-- `rules/*.list`: compatibility copies
+- `loon.conf`: compatibility copy
 - `sources.md`: upstream/source tracking
+- `backups/`: local backup copies created before replacing the old template
