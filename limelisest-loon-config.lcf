@@ -74,20 +74,12 @@ Japan = url-test,JP,url = http://1.1.1.1/generate_204,interval = 300,tolerance =
 Taiwan = url-test,TW,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
 
 [Rule]
-# Local domestic/Tencent overrides. Keep these before FINAL to avoid falling into proxy fallback.
-DOMAIN,appcfg.v.qq.com,DIRECT
-DOMAIN-SUFFIX,qq.com,DIRECT
-DOMAIN-SUFFIX,qpic.cn,DIRECT
-DOMAIN-SUFFIX,gtimg.com,DIRECT
-DOMAIN-SUFFIX,qlogo.cn,DIRECT
-DOMAIN-SUFFIX,tencent.com,DIRECT
-DOMAIN-SUFFIX,tencent-cloud.net,DIRECT
-DOMAIN-SUFFIX,myqcloud.com,DIRECT
-DOMAIN-SUFFIX,wechat.com,DIRECT
-GEOIP,CN,DIRECT
 FINAL,兜底后备
 
 [Remote Rule]
+# Self-maintained cloud overrides. Keep before upstream rules to avoid falling into proxy fallback.
+https://limelisest.github.io/loon-config/rules/limelisest-direct.lsr, policy=DIRECT, tag=LimelisestDirect, enabled=true
+
 # Primary rule source: blackmatrix7/ios_rule_script Loon rules.
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Direct/Direct.list, policy=DIRECT, tag=Direct, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/AdvertisingLite/AdvertisingLite.list, policy=REJECT, tag=AdvertisingLite, enabled=true

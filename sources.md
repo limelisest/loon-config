@@ -18,8 +18,8 @@
   - Pixiv / BOOTH / FANBOX uses upstream `Pixiv/Pixiv.list`, which contains `booth.pm`, `fanbox.cc`, `pixiv.*`, and `pximg.net`, all using policy `Pixiv/booth/fanbox`.
   - Pixiv policy icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
   - Apple rules use policy `DIRECT`.
-  - Tencent/QQ handling: local DIRECT overrides force `appcfg.v.qq.com`, `*.qq.com`, `*.gtimg.com`, `*.qpic.cn`, `*.tencent.com`, `*.tencent-cloud.net`, `*.myqcloud.com`, and `*.wechat.com` to direct. Upstream `TencentVideo` and `WeChat` rules are also referenced as DIRECT before the general `Proxy` rule.
-  - `China`, `LAN`, Tencent/QQ direct rules are kept before the general `Proxy` rule to avoid domestic domains falling into proxy fallback.
+  - Tencent/QQ handling: self-maintained cloud rule `rules/limelisest-direct.lsr` forces `appcfg.v.qq.com`, `*.qq.com`, `*.gtimg.com`, `*.qpic.cn`, `*.tencent.com`, `*.tencent-cloud.net`, `*.myqcloud.com`, and `*.wechat.com` to direct. Upstream `TencentVideo` and `WeChat` rules are also referenced as DIRECT before the general `Proxy` rule.
+  - `limelisest-direct`, `China`, `LAN`, Tencent/QQ direct rules are kept before the general `Proxy` rule to avoid domestic domains falling into proxy fallback.
   - Ad blocking uses `AdvertisingLite` and `Hijacking`.
 - Base config source remains Repcz/Tool; plugin URLs inherited from the copied base remain unchanged except user-requested edits.
 - Loyalsoldier GeoIP / ASN databases:

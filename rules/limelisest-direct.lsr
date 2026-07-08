@@ -1,0 +1,13 @@
+# NAME: LimelisestDirect
+# DESC: Self-maintained DIRECT cloud rules for domestic/Tencent overrides.
+# POLICY: assigned by limelisest-loon-config.lcf [Remote Rule]
+
+DOMAIN,appcfg.v.qq.com
+DOMAIN-SUFFIX,qq.com
+DOMAIN-SUFFIX,qpic.cn
+DOMAIN-SUFFIX,gtimg.com
+DOMAIN-SUFFIX,qlogo.cn
+DOMAIN-SUFFIX,tencent.com
+DOMAIN-SUFFIX,tencent-cloud.net
+DOMAIN-SUFFIX,myqcloud.com
+DOMAIN-SUFFIX,wechat.com
