@@ -74,7 +74,8 @@ Japan = url-test,JP,url = http://1.1.1.1/generate_204,interval = 300,tolerance =
 Taiwan = url-test,TW,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
 
 [Rule]
-FINAL,兜底后备
+# Default DIRECT: only domains matched by proxy/GFW-style remote rules use proxy.
+FINAL,DIRECT
 
 [Remote Rule]
 # Self-maintained cloud overrides. Keep before upstream rules to avoid falling into proxy fallback.
@@ -112,7 +113,8 @@ https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/China/
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMax/ChinaMax.list, policy=DIRECT, tag=ChinaMax, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/TencentVideo/TencentVideo.list, policy=DIRECT, tag=TencentVideo, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/WeChat/WeChat.list, policy=DIRECT, tag=WeChat, enabled=true
-https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Proxy/Proxy.list, policy=兜底后备, tag=Proxy, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Global/Global.list, policy=兜底后备, tag=Global_GFW, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Proxy/Proxy.list, policy=兜底后备, tag=Proxy, enabled=false
 
 [Host]
 # App Store 下载请求解析 金山CDN

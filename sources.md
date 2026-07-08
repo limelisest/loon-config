@@ -18,8 +18,9 @@
   - Pixiv / BOOTH / FANBOX uses upstream `Pixiv/Pixiv.list`, which contains `booth.pm`, `fanbox.cc`, `pixiv.*`, and `pximg.net`, all using policy `Pixiv/booth/fanbox`.
   - Pixiv policy icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
   - Apple rules use policy `DIRECT`.
-  - Tencent/QQ handling: self-maintained cloud rule `rules/limelisest-direct.lsr` forces `appcfg.v.qq.com`, `*.qq.com`, `*.gtimg.com`, `*.qpic.cn`, `*.tencent.com`, `*.tencent-cloud.net`, `*.myqcloud.com`, and `*.wechat.com` to direct. Upstream `TencentVideo` and `WeChat` rules are also referenced as DIRECT before the general `Proxy` rule.
-  - `limelisest-direct`, `ChinaMax`, `LAN`, Tencent/QQ direct rules are kept before the general `Proxy` rule to avoid domestic domains falling into proxy fallback. The original `China` rule is retained but disabled for easy rollback.
+  - Tencent/QQ handling: self-maintained cloud rule `rules/limelisest-direct.lsr` forces `appcfg.v.qq.com`, `*.qq.com`, `*.gtimg.com`, `*.qpic.cn`, `*.tencent.com`, `*.tencent-cloud.net`, `*.myqcloud.com`, and `*.wechat.com` to direct. Upstream `TencentVideo` and `WeChat` rules are also referenced as DIRECT.
+  - Default route is `DIRECT`. Upstream `Global/Global.list` is used as the GFW-style proxy rule into `兜底后备`; the broader `Proxy/Proxy.list` is retained but disabled for rollback.
+  - `limelisest-direct`, `ChinaMax`, `LAN`, Tencent/QQ direct rules are kept before the Global/Proxy fallback rules. The original `China` rule is retained but disabled for easy rollback.
   - Ad blocking uses `AdvertisingLite` and `Hijacking`.
 - Base config source remains Repcz/Tool; plugin URLs inherited from the copied base remain unchanged except user-requested edits.
 - Loyalsoldier GeoIP / ASN databases:
