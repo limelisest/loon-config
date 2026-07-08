@@ -36,7 +36,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 3. Tune `[Proxy Group]`: `兜底后备` is the only base manual selector, and its default first option is `自动选择`.
 4. Category groups such as `AI`, `Streaming`, `Telegram`, and `Pixiv/booth/fanbox` point to their preferred default first, then fallback choices.
 5. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
-6. Apple rules default to `DIRECT`.
+6. Apple and Tencent/QQ local overrides default to `DIRECT`; `appcfg.v.qq.com` and `*.qq.com` are forced direct before fallback.
 7. BiliBili ad removal uses the original Kelee `Bilibili_remove_ads.lpx`, enabled by default.
 8. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
