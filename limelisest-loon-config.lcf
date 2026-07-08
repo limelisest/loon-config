@@ -108,7 +108,8 @@ https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Disney
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/PrimeVideo/PrimeVideo.list, policy=Streaming, tag=PrimeVideo, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/HBO/HBO.list, policy=Streaming, tag=HBO, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Lan/Lan.list, policy=DIRECT, tag=LAN, enabled=true
-https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/China/China.list, policy=DIRECT, tag=China, enabled=true
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/China/China.list, policy=DIRECT, tag=China, enabled=false
+https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/ChinaMax/ChinaMax.list, policy=DIRECT, tag=ChinaMax, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/TencentVideo/TencentVideo.list, policy=DIRECT, tag=TencentVideo, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/WeChat/WeChat.list, policy=DIRECT, tag=WeChat, enabled=true
 https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/Proxy/Proxy.list, policy=兜底后备, tag=Proxy, enabled=true
