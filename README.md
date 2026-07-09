@@ -33,13 +33,14 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 
 1. Add your proxy subscription/nodes locally in Loon or under `[Remote Proxy]` if you publish privately.
 2. Check `[Remote Filter]` node matching: `HK`, `US`, `SG`, `JP`, `TW`.
-3. Tune `[Proxy Group]`: `兜底后备` is the only base manual selector, and its default first option is `自动选择`.
-4. Category groups such as `AI`, `Streaming`, `Telegram`, and `Pixiv/booth/fanbox` point to their preferred default first, then fallback choices.
-5. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
-6. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the broader old `Proxy` rule is retained but disabled.
-7. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
-8. BiliBili ad removal uses the original Kelee `Bilibili_remove_ads.lpx`, enabled by default.
-9. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
+3. `[Proxy Group]` is organized into three sections: `节点选择策略`, `分流策略`, and `国家策略`.
+4. Tune `节点选择策略`: `兜底后备` is the only base manual selector, and its default first option is `自动选择`.
+5. Category groups such as `AI`, `Streaming`, `Telegram`, and `Pixiv/booth/fanbox` are under `分流策略` and point to their preferred default first, then fallback choices.
+6. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
+7. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the broader old `Proxy` rule is retained but disabled.
+8. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
+9. BiliBili ad removal uses the original Kelee `Bilibili_remove_ads.lpx`, enabled by default.
+10. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
 ## Files
 

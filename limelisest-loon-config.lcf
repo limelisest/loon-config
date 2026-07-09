@@ -50,11 +50,13 @@ JP = NameRegex, FilterKey = "(?i)🇯🇵|日本|东京|(\b(JP|Japan)\b)"
 TW = NameRegex, FilterKey = "(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)"
 
 [Proxy Group]
-# 基础策略：只保留一个手动选择入口「兜底后备」，默认第一项为「自动选择」
+# ===== 节点选择策略 =====
+# 只保留一个手动选择入口「兜底后备」，默认第一项为「自动选择」
 兜底后备 = select,自动选择,HongKong,United States,Singapore,Japan,Taiwan,All,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
 自动选择 = url-test,All,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
 
-# 分流策略组：规则按类别进入对应策略，默认都先走「兜底后备」
+# ===== 分流策略 =====
+# 规则按类别进入对应策略，默认都先走「兜底后备」
 Streaming = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 Pixiv/booth/fanbox = select,Japan,兜底后备,HongKong,United States,Singapore,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
 Microsoft = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
@@ -66,7 +68,7 @@ Game = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,
 Emby = select,兜底后备,All,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
 Spotify = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
 
-# 地区策略组
+# ===== 国家策略 =====
 HongKong = url-test,HK,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
 United States = url-test,US,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
 Singapore = url-test,SG,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
