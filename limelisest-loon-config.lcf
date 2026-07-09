@@ -43,6 +43,8 @@ ipasn-url = https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite
 
 [Remote Filter]
 All = NameRegex, FilterKey = .
+# NodeSelect 筛选器：用于在 Loon 内只选择本地添加的节点
+本地节点筛选 = NodeSelect
 HK = NameRegex, FilterKey = "(?i)🇭🇰|香港|(\b(HK|Hong)\b)"
 US = NameRegex, FilterKey = "(?i)🇺🇸|美国|洛杉矶|圣何塞|(\b(US|United States)\b)"
 SG = NameRegex, FilterKey = "(?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)\b)"
@@ -51,9 +53,9 @@ TW = NameRegex, FilterKey = "(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)"
 
 [Proxy Group]
 # ===== 节点选择策略 =====
-# 「兜底后备」是手动选择入口，置顶「本地节点」方便优先选择 App 内添加的节点
-兜底后备 = select,本地节点,自动选择,HongKong,United States,Singapore,Japan,Taiwan,All,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
-本地节点 = select,All,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
+# 「兜底后备」是手动选择入口，默认第一项为「自动选择」
+兜底后备 = select,自动选择,本地节点,HongKong,United States,Singapore,Japan,Taiwan,All,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+本地节点 = select,本地节点筛选,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
 自动选择 = url-test,All,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
 
 # ===== 分流策略 =====
