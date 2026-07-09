@@ -34,7 +34,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 1. Add your proxy subscription/nodes locally in Loon or under `[Remote Proxy]` if you publish privately.
 2. Check `[Remote Filter]` node matching: `HK`, `US`, `SG`, `JP`, `TW`.
 3. `[Proxy Group]` is organized into three sections: `节点选择策略`, `分流策略`, and `国家策略`.
-4. Tune `节点选择策略`: `兜底后备` is the only base manual selector, and its default first option is `自动选择`.
+4. Tune `节点选择策略`: `兜底后备` is the base manual selector; its first option is `本地节点`, followed by `自动选择`. `本地节点` references the `All` node filter so App-local nodes can be picked quickly.
 5. Category groups such as `AI`, `Streaming`, `Telegram`, and `Pixiv/booth/fanbox` are under `分流策略` and point to their preferred default first, then fallback choices.
 6. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
 7. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the broader old `Proxy` rule is retained but disabled.
