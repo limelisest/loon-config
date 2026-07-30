@@ -1,0 +1,6 @@
+# NAME: iOSPush
+# DESC: Apple Push Notification service (APNs) device connection domains.
+# POLICY: assigned by limelisest-loon-config.lcf [Remote Rule]
+# Apple reference: https://support.apple.com/102266
+
+DOMAIN-SUFFIX,push.apple.com

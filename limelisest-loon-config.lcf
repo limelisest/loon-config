@@ -59,7 +59,8 @@ TW = NameRegex, FilterKey = "(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)"
 自动选择 = url-test,All,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
 
 # ===== 分流策略 =====
-# 规则按类别进入对应策略，默认都先走「兜底后备」
+# 规则按类别进入对应策略；iOS推送默认直连，可手动切换到兜底后备测试
+iOS推送 = select,DIRECT,兜底后备,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple.png
 Streaming = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
 Pixiv/booth/fanbox = select,Japan,兜底后备,HongKong,United States,Singapore,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
 Microsoft = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
@@ -85,6 +86,7 @@ FINAL,DIRECT
 [Remote Rule]
 # Self-maintained cloud overrides. Keep before upstream rules to avoid falling into proxy fallback.
 https://limelisest.github.io/loon-config/rules/limelisest-direct.lsr, policy=DIRECT, tag=LimelisestDirect, enabled=true
+https://limelisest.github.io/loon-config/rules/ios-push.lsr, policy=iOS推送, tag=iOS推送, enabled=true
 
 # Primary rule source: blackmatrix7/ios_rule_script Loon rules.
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Direct/Direct.list, policy=DIRECT, tag=Direct, enabled=true
@@ -162,3 +164,5 @@ https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.pl
 https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin, tag=WeatherKit[仅限iOS18及以上], enabled=true
 
 [Mitm]
+# Explicitly exclude APNs from HTTPS decryption. Routing via iOS推送 does not require MITM.
+hostname = -*.push.apple.com, -push.apple.com

@@ -16,6 +16,9 @@
   - Used because it provides native Loon rule paths and maintained category rules.
   - `[Proxy Group]` is organized into three sections: `节点选择策略`, `分流策略`, and `国家策略`.
   - `节点选择策略` includes `本地节点`, a manual select group referencing the `本地节点筛选` NodeSelect filter. `兜底后备` defaults to `自动选择`, with `本地节点` as the next manual option.
+  - Apple APNs device connections use the self-maintained `rules/ios-push.lsr` (`DOMAIN-SUFFIX,push.apple.com`) with policy `iOS推送`, defaulting to DIRECT and allowing manual fallback-proxy testing.
+  - Apple APNs network requirements: https://support.apple.com/102266 — device connections use TCP 5223 with TCP 443 fallback; Apple states a proxy must pass port 443 traffic without decrypting it.
+  - `[Mitm]` explicitly excludes `*.push.apple.com` and `push.apple.com` using negative hostname entries.
   - AI is split into `OpenAI`, `Anthropic`, and `Gemini`, all using policy `AI`.
   - Pixiv / BOOTH / FANBOX uses upstream `Pixiv/Pixiv.list`, which contains `booth.pm`, `fanbox.cc`, `pixiv.*`, and `pximg.net`, all using policy `Pixiv/booth/fanbox`.
   - Game platforms use upstream aggregate `Game/Game.list` with policy `Game`. Its upstream README states it includes Steam, Epic, Xbox, Nintendo, PlayStation, EA, Blizzard, UBI/Ubisoft, Rockstar and other game services. Separate Steam/Epic entries remain disabled to avoid duplicates.
