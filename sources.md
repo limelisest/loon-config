@@ -16,8 +16,8 @@
   - Used because it provides native Loon rule paths and maintained category rules.
   - `[Proxy Group]` is organized into three sections: `节点选择策略`, `分流策略`, and `国家策略`.
   - `节点选择策略` includes `本地节点`, a manual select group referencing the `本地节点筛选` NodeSelect filter. `兜底后备` defaults to `自动选择`, with `本地节点` as the next manual option.
-  - Apple push routing uses blackmatrix7 `Apple_All_No_Resolve.list` with policy `iOS推送`: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list
-  - This broader rule is used because it restored push delivery where the previous narrow APNs rule did not. Compared with the narrow list, it includes `17.0.0.0/8`, broader Apple IPv6 prefixes, additional Apple domains, and `PROCESS-NAME,apsd`.
+  - Apple push routing directly references QuixoticHeart's Loon APNs rule with policy `iOS推送`: https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/loon/apns.list
+  - Upstream repository: https://github.com/QuixoticHeart/rule-set (GPL-3.0). The rule covers APNs-related domains and selected Apple IPv4/IPv6 prefixes without routing all Apple services.
   - Apple APNs network requirements: https://support.apple.com/102266 — device connections use TCP 5223 with TCP 443 fallback; Apple states a proxy must pass port 443 traffic without decrypting it.
   - `[Mitm]` explicitly excludes APNs-related `push.apple.com`, `identity.apple.com`, `akadns.net`, and `apple.com.edgekey.net` hostnames using negative entries.
   - AI is split into `OpenAI`, `Anthropic`, and `Gemini`, all using policy `AI`.

@@ -86,7 +86,7 @@ FINAL,DIRECT
 [Remote Rule]
 # Self-maintained cloud overrides. Keep before upstream rules to avoid falling into proxy fallback.
 https://limelisest.github.io/loon-config/rules/limelisest-direct.lsr, policy=DIRECT, tag=LimelisestDirect, enabled=true
-https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Surge/Apple/Apple_All_No_Resolve.list, policy=iOS推送, tag=iOS推送_AppleAll, enabled=true
+https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/loon/apns.list, policy=iOS推送, tag=iOS推送_APNs, enabled=true
 
 # Primary rule source: blackmatrix7/ios_rule_script Loon rules.
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Direct/Direct.list, policy=DIRECT, tag=Direct, enabled=true

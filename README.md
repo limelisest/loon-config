@@ -41,7 +41,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 8. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the broader old `Proxy` rule is retained but disabled.
 9. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
 10. BiliBili ad removal uses the original Kelee `Bilibili_remove_ads.lpx`, enabled by default.
-11. `iOS推送` uses blackmatrix7 `Apple_All_No_Resolve.list`, defaults to `DIRECT`, and can be switched to `兜底后备`. This broader rule includes Apple domains, the complete Apple network ranges used by the rule, and `PROCESS-NAME,apsd`; it is used because the narrow APNs rule did not restore push delivery in mainland China. APNs domains remain excluded from MITM.
+11. `iOS推送` directly references QuixoticHeart's Loon `apns.list`, defaults to `DIRECT`, and can be switched to `兜底后备`. The rule covers APNs domains plus selected IPv4/IPv6 prefixes; APNs domains remain excluded from MITM.
 12. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
 ## Files
