@@ -165,4 +165,4 @@ https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit
 
 [Mitm]
 # Explicitly exclude APNs from HTTPS decryption. Routing via iOS推送 does not require MITM.
-hostname = -*.push.apple.com, -push.apple.com
+hostname = -*.push.apple.com, -push.apple.com, -identity.apple.com, -*.akadns.net, -*.apple.com.edgekey.net, -apple.com.edgekey.net
