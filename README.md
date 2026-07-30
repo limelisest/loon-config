@@ -5,7 +5,7 @@ A Loon cloud configuration based on a mature upstream template.
 ## Current base
 
 - Base config: `Repcz/Tool` → `Tool/X/Loon/Loon.conf`.
-- Remote rules primarily use `blackmatrix7/ios_rule_script` Loon rule lists via jsDelivr (`cdn.jsdelivr.net/gh/...`).
+- Remote rules primarily use `blackmatrix7/ios_rule_script` Loon rule lists via GitHub raw direct links (`raw.githubusercontent.com/...`).
 - Upstream author header is preserved in `limelisest-loon-config.lcf`.
 - Loon requirement noted by upstream: `Loon Version ≥ 3.2.3`.
 
@@ -35,12 +35,13 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 2. Check `[Remote Filter]` node matching: `HK`, `US`, `SG`, `JP`, `TW`.
 3. `[Proxy Group]` is organized into three sections: `节点选择策略`, `分流策略`, and `国家策略`.
 4. Tune `节点选择策略`: `兜底后备` is the base manual selector; its first/default option is `自动选择`, followed by `本地节点`. `本地节点` uses the `本地节点筛选` NodeSelect filter, intended to include only nodes added locally in Loon.
-5. Category groups such as `AI`, `Streaming`, `Telegram`, and `Pixiv/booth/fanbox` are under `分流策略` and point to their preferred default first, then fallback choices.
+5. Category groups such as `AI`, `Streaming`, `Telegram`, `Game`, and `Pixiv/booth/fanbox` are under `分流策略` and point to their preferred default first, then fallback choices.
 6. `Pixiv/booth/fanbox` covers Pixiv / BOOTH / FANBOX via the upstream `Pixiv` rule and defaults to `Japan`.
-7. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the broader old `Proxy` rule is retained but disabled.
-8. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
-9. BiliBili ad removal uses the original Kelee `Bilibili_remove_ads.lpx`, enabled by default.
-10. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
+7. `游戏服务` uses the upstream aggregate `Game` rule with policy `Game`, covering Steam, Epic, Xbox, Nintendo/Switch, PlayStation, EA, Blizzard, Ubisoft and other platforms. Separate Steam/Epic rules are retained but disabled to avoid duplicate matching.
+8. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the broader old `Proxy` rule is retained but disabled.
+9. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
+10. BiliBili ad removal uses the original Kelee `Bilibili_remove_ads.lpx`, enabled by default.
+11. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
 ## Files
 

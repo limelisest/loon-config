@@ -11,13 +11,14 @@
 
 ## Upstream resources referenced by the copied config
 
-- Primary remote rules: blackmatrix7/ios_rule_script Loon rules under `https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Loon/...`.
+- Primary remote rules: blackmatrix7/ios_rule_script Loon rules under `https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/...`.
   - Repository: https://github.com/blackmatrix7/ios_rule_script
   - Used because it provides native Loon rule paths and maintained category rules.
   - `[Proxy Group]` is organized into three sections: `节点选择策略`, `分流策略`, and `国家策略`.
   - `节点选择策略` includes `本地节点`, a manual select group referencing the `本地节点筛选` NodeSelect filter. `兜底后备` defaults to `自动选择`, with `本地节点` as the next manual option.
   - AI is split into `OpenAI`, `Anthropic`, and `Gemini`, all using policy `AI`.
   - Pixiv / BOOTH / FANBOX uses upstream `Pixiv/Pixiv.list`, which contains `booth.pm`, `fanbox.cc`, `pixiv.*`, and `pximg.net`, all using policy `Pixiv/booth/fanbox`.
+  - Game platforms use upstream aggregate `Game/Game.list` with policy `Game`. Its upstream README states it includes Steam, Epic, Xbox, Nintendo, PlayStation, EA, Blizzard, UBI/Ubisoft, Rockstar and other game services. Separate Steam/Epic entries remain disabled to avoid duplicates.
   - Pixiv policy icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
   - Apple rules use policy `DIRECT`.
   - Tencent/QQ handling: self-maintained cloud rule `rules/limelisest-direct.lsr` forces `appcfg.v.qq.com`, `*.qq.com`, `*.gtimg.com`, `*.qpic.cn`, `*.tencent.com`, `*.tencent-cloud.net`, `*.myqcloud.com`, and `*.wechat.com` to direct. Upstream `TencentVideo` and `WeChat` rules are also referenced as DIRECT.
