@@ -26,7 +26,7 @@
   - Pixiv policy icon: https://raw.githubusercontent.com/lige47/QuanX-icon-rule/main/icon/04ProxySoft/pixiv.png
   - Apple rules use policy `DIRECT`.
   - Tencent/QQ handling: self-maintained cloud rule `rules/limelisest-direct.lsr` forces `appcfg.v.qq.com`, `*.qq.com`, `*.gtimg.com`, `*.qpic.cn`, `*.tencent.com`, `*.tencent-cloud.net`, `*.myqcloud.com`, and `*.wechat.com` to direct. Upstream `TencentVideo` and `WeChat` rules are also referenced as DIRECT.
-  - Default route is `DIRECT`. Upstream `Global/Global.list` is used as the GFW-style proxy rule into `兜底后备`; the broader `Proxy/Proxy.list` is retained but disabled for rollback.
+  - Default route is `DIRECT`. Upstream `Global/Global.list` is used as the GFW-style proxy rule into `兜底后备`; `Proxy/Proxy.list` is retained but disabled because Global includes Proxy.
   - `limelisest-direct`, `ChinaMax`, `LAN`, Tencent/QQ direct rules are kept before the Global/Proxy fallback rules. The original `China` rule is retained but disabled for easy rollback.
   - Ad blocking uses `AdvertisingLite` and `Hijacking`.
 - Base config source remains Repcz/Tool; plugin URLs inherited from the copied base remain unchanged except user-requested edits.
@@ -57,3 +57,21 @@ These were used by the old lightweight template and may still be useful when cus
 - Keep subscription URLs, node passwords, cookies, MITM certificates, and private keys out of this public repository.
 - If plugin behavior causes breakage, disable the relevant `[Plugin]` line first, then test again.
 - If this config is republished publicly, preserve upstream attribution and license notices.
+
+## 2026-09-26 connectivity review
+
+- Discord rules: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Discord/Discord.list
+- Nintendo rules: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Nintendo/Nintendo.list
+- Both use dedicated policies before aggregate rules; core domains also have local overrides.
+- Loon rule priority (local > plugin > remote, FINAL only after no match): https://nsloon.app/docs/Rule/
+- Loon UDP fallback, LAN access and official test endpoint: https://nsloon.app/en/docs/General/
+- Discord voice uses separately negotiated UDP IP/port: https://docs.discord.com/developers/topics/voice-connections
+- No device/node connection success is claimed by this source review.
+
+## Complete split-rule coverage
+
+- The upstream explicitly requires paired files: https://github.com/blackmatrix7/ios_rule_script/blob/master/rule/Loon/Global/README.md
+- Added matching `_Domain.list` subscriptions for Global, ChinaMax, Apple and AdvertisingLite with the same policy as their normal list.
+- Global already includes Proxy; the disabled Proxy entry remains disabled to avoid redundant coverage.
+- Added native Loon lists for Instagram, Whatsapp, Line, Reddit, Twitch, Notion, Dropbox and Wikimedia, all from the same blackmatrix7 upstream.
+- Correction to the initial diagnosis: Discord exists in Global_Domain.list; the old config omitted that file. HTTP 200 alone did not establish complete rule coverage.

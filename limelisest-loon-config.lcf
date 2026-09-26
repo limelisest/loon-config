@@ -16,7 +16,7 @@ ip-mode = ipv4-only
 # DNS 服务，system 表示系统自带 DNS 服务器
 dns-server = 223.5.5.5,119.29.29.29
 # 测试链接
-proxy-test-url = http://1.1.1.1/generate_204
+proxy-test-url = http://cp.cloudflare.com/generate_204
 internet-test-url = http://wifi.vivo.com.cn/generate_204
 # 策略切换时关闭连接
 disconnect-on-policy-change = true
@@ -28,7 +28,7 @@ domain-reject-mode = DNS
 dns-reject-mode = LOOPBACKIP
 # SNI 辅助规则匹配
 sni-sniffing = true
-# UDP 回落策略
+# UDP 回落策略：节点须支持并开启 UDP；HTTP 测速成功不代表 UDP 可用
 udp-fallback-mode = REJECT
 # 网络接口
 interface-mode = auto
@@ -56,7 +56,7 @@ TW = NameRegex, FilterKey = "(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)"
 # 「兜底后备」是手动选择入口，默认第一项为「自动选择」
 兜底后备 = select,自动选择,本地节点,HongKong,United States,Singapore,Japan,Taiwan,All,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
 本地节点 = select,本地节点筛选,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
-自动选择 = url-test,All,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+自动选择 = url-test,All,url = http://cp.cloudflare.com/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
 
 # ===== 分流策略 =====
 # 规则按类别进入对应策略；iOS推送默认直连，可手动切换到兜底后备测试
@@ -68,18 +68,36 @@ Google = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIREC
 AI = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Orz-3/mini/master/Color/OpenAI.png
 Social = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Twitter.png
 Telegram = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+# Discord / Nintendo Switch App 可通过 All 固定具体节点，避免自动测速切换影响长连接。
+Discord = select,兜底后备,All,本地节点,HongKong,United States,Singapore,Japan,Taiwan,DIRECT
+Nintendo = select,Game,All,本地节点,HongKong,United States,Singapore,Japan,Taiwan,DIRECT
 Game = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Steam.png
 Emby = select,兜底后备,All,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
 Spotify = select,兜底后备,HongKong,United States,Singapore,Japan,Taiwan,DIRECT,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Spotify.png
 
 # ===== 国家策略 =====
-HongKong = url-test,HK,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-United States = url-test,US,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-Singapore = url-test,SG,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-Japan = url-test,JP,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-Taiwan = url-test,TW,url = http://1.1.1.1/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
+HongKong = url-test,HK,url = http://cp.cloudflare.com/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+United States = url-test,US,url = http://cp.cloudflare.com/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+Singapore = url-test,SG,url = http://cp.cloudflare.com/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+Japan = url-test,JP,url = http://cp.cloudflare.com/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+Taiwan = url-test,TW,url = http://cp.cloudflare.com/generate_204,interval = 300,tolerance = 0,img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/China.png
 
 [Rule]
+# 核心服务本地规则优先于插件/订阅；远程规则下载失败时仍可分流。
+DOMAIN-SUFFIX,discord.com,Discord
+DOMAIN-SUFFIX,discord.gg,Discord
+DOMAIN-SUFFIX,discord.media,Discord
+DOMAIN-SUFFIX,discordapp.com,Discord
+DOMAIN-SUFFIX,discordapp.net,Discord
+DOMAIN-SUFFIX,discordcdn.com,Discord
+DOMAIN-SUFFIX,dis.gd,Discord
+DOMAIN-SUFFIX,nintendo.net,Nintendo
+DOMAIN-SUFFIX,nintendowifi.net,Nintendo
+DOMAIN-SUFFIX,nintendo.com,Nintendo
+DOMAIN-SUFFIX,nintendo.co.jp,Nintendo
+DOMAIN-SUFFIX,nintendonetwork.net,Nintendo
+DOMAIN-SUFFIX,nintendoswitch.com,Nintendo
+DOMAIN-SUFFIX,nintendoswitch.net,Nintendo
 # Default DIRECT: only domains matched by proxy/GFW-style remote rules use proxy.
 FINAL,DIRECT
 
@@ -88,9 +106,15 @@ FINAL,DIRECT
 https://limelisest.github.io/loon-config/rules/limelisest-direct.lsr, policy=DIRECT, tag=LimelisestDirect, enabled=true
 https://raw.githubusercontent.com/QuixoticHeart/rule-set/refs/heads/ruleset/loon/apns.list, policy=iOS推送, tag=iOS推送_APNs, enabled=true
 
+# Service-specific rules precede aggregate Game / Google / Global rules.
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Discord/Discord.list, policy=Discord, tag=Discord, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Nintendo/Nintendo.list, policy=Nintendo, tag=Nintendo_Switch, enabled=true
+
+# 大型规则的 .list 与 _Domain.list 必须配套引用；后者为上游域名集。
 # Primary rule source: blackmatrix7/ios_rule_script Loon rules.
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Direct/Direct.list, policy=DIRECT, tag=Direct, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/AdvertisingLite/AdvertisingLite.list, policy=REJECT, tag=AdvertisingLite, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/AdvertisingLite/AdvertisingLite_Domain.list, policy=REJECT, tag=AdvertisingLite_Domain, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Hijacking/Hijacking.list, policy=REJECT, tag=Hijacking, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/OpenAI/OpenAI.list, policy=AI, tag=OpenAI, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Anthropic/Anthropic.list, policy=AI, tag=Anthropic, enabled=true
@@ -98,6 +122,10 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Telegram/Telegram.list, policy=Telegram, tag=Telegram, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitter/Twitter.list, policy=Social, tag=Twitter, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Facebook/Facebook.list, policy=Social, tag=Facebook, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Instagram/Instagram.list, policy=Social, tag=Instagram, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Whatsapp/Whatsapp.list, policy=Social, tag=Whatsapp, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Line/Line.list, policy=Social, tag=Line, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Reddit/Reddit.list, policy=Social, tag=Reddit, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TikTok/TikTok.list, policy=Social, tag=TikTok, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Pixiv/Pixiv.list, policy=Pixiv/booth/fanbox, tag=Pixiv_BOOTH_FANBOX, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Game/Game.list, policy=Game, tag=游戏服务, enabled=true
@@ -107,7 +135,11 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Google/Google.list, policy=Google, tag=Google, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/GitHub/GitHub.list, policy=Microsoft, tag=GitHub, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Microsoft/Microsoft.list, policy=Microsoft, tag=Microsoft, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Notion/Notion.list, policy=兜底后备, tag=Notion, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Dropbox/Dropbox.list, policy=兜底后备, tag=Dropbox, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Wikimedia/Wikimedia.list, policy=兜底后备, tag=Wikimedia, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple.list, policy=DIRECT, tag=Apple, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Apple/Apple_Domain.list, policy=DIRECT, tag=Apple_Domain, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/AppleProxy/AppleProxy.list, policy=DIRECT, tag=AppleProxy, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Emby/Emby.list, policy=Emby, tag=Emby, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Spotify/Spotify.list, policy=Spotify, tag=Spotify, enabled=true
@@ -116,12 +148,15 @@ https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Disney/Disney.list, policy=Streaming, tag=Disney, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/PrimeVideo/PrimeVideo.list, policy=Streaming, tag=PrimeVideo, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/HBO/HBO.list, policy=Streaming, tag=HBO, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Twitch/Twitch.list, policy=Streaming, tag=Twitch, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Lan/Lan.list, policy=DIRECT, tag=LAN, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/China/China.list, policy=DIRECT, tag=China, enabled=false
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaMax/ChinaMax.list, policy=DIRECT, tag=ChinaMax, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/ChinaMax/ChinaMax_Domain.list, policy=DIRECT, tag=ChinaMax_Domain, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/TencentVideo/TencentVideo.list, policy=DIRECT, tag=TencentVideo, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/WeChat/WeChat.list, policy=DIRECT, tag=WeChat, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Global/Global.list, policy=兜底后备, tag=Global_GFW, enabled=true
+https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Global/Global_Domain.list, policy=兜底后备, tag=Global_Domain, enabled=true
 https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Loon/Proxy/Proxy.list, policy=兜底后备, tag=Proxy, enabled=false
 
 [Host]
