@@ -2,15 +2,16 @@
 
 安装地址：<https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin>
 
-2026-10-20 首版，收录下表 34 个 App 的已知开屏接口或专用素材。这里的“覆盖”表示规则已收录，不表示每个版本、每次启动都有效；尚未完成 iPhone / Loon 设备实测。
+2026-10-20 更新，收录下表 35 个 App 的已知开屏接口或专用素材。这里的“覆盖”表示规则已收录，不表示每个版本、每次启动都有效；尚未完成 iPhone / Loon 设备实测。
 
-需要 **Loon Build 729 或以上**（京东、小红书使用原生 `response-body-json-jq`），开启 MITM 并信任证书。云配置已用本插件替换原 B站仅开屏项，仍只启用本插件、WeatherKit、Kelee YouTube 三项。单独安装过旧插件的设备需手动停用旧项，尤其不要叠加 B站完整去广告或 B站仅开屏插件。
+需要 **Loon Build 729 或以上**（京东、小红书、酷安使用原生 `response-body-json-jq`），开启 MITM 并信任证书。云配置已用本插件替换原 B站仅开屏项，仍只启用本插件、WeatherKit、Kelee YouTube 三项。单独安装过旧插件的设备需手动停用旧项，尤其不要叠加 B站完整去广告或 B站仅开屏插件。
 
 | App | 收录范围 |
 | --- | --- |
 | 哔哩哔哩 | `/x/v2/splash/` 下 list、show、brand/list、event/list2 |
 | 京东 | `functionId=start` 的 images / showTimesDaily；home_launchConfig |
 | 小红书 | `system_service/splash_config` 的 data.ads_groups |
+| 酷安 | `v6/main/init` 的 data 数组中仅移除数值 entityId=945 的开屏项 |
 | 拼多多 | `api/cappuccino/splash`，含 yangkeduo 域名 |
 | 闲鱼 | idlecommerce.splash.ads / splash.async.ads，含旧 taobao 网关 |
 | 淘宝 | 带 tao_splash 的 noah.query；home.splash.awesome.get |
@@ -43,7 +44,7 @@
 | 脉脉 | sdk/global/splash_ad、maimai/launch_ad |
 | 微博 | sdkapp 请求仅 sub_ad_type=splash |
 
-插件不注册首页信息流、评论、视频详情、搜索、订单、支付、登录处理，不拦整个共享广告 SDK / CDN 域名。京东、小红书会保留正常响应结构；字段缺失或类型不符合预期时保持原值。其他收录接口采用拒绝响应；可能触发 App 的本地缓存或回退逻辑，不能承诺每次冷启动无广告。
+插件不注册首页信息流、评论、视频详情、搜索、订单、支付、登录处理，不拦整个共享广告 SDK / CDN 域名。京东、小红书、酷安会保留正常响应结构；字段缺失或类型不符合预期时保持原值。酷安仅处理启动配置中的 945 项，保留热搜、首页 Tab、其他模块和原有顺序；不引入全局穿山甲拦截。此标识来自上游脚本，尚未用当前设备响应验证；其他 SDK 下发或缓存开屏不保证覆盖。其他收录接口采用拒绝响应；可能触发 App 的本地缓存或回退逻辑，不能承诺每次冷启动无广告。
 
 12306、滴滴、菜鸟、网易云音乐及爱奇艺等暂不纳入：本次审阅到的方案涉及共享广告位、混合启动配置或加密响应，尚不能确认可在该范围内单独处理开屏。后续仅在找到可明确区分的开屏接口后补入。
 

@@ -53,6 +53,8 @@ def main():
         "https://api.m.jd.com/client.action?functionId=home_launchConfig",
         "https://edith.xiaohongshu.com/api/sns/v1/system_service/splash_config?device=ios",
         "https://www.xiaohongshu.com/api/sns/v2/system_service/splash_config",
+        "https://api.coolapk.com/v6/main/init",
+        "https://api.coolapk.com/v6/main/init?app=ios",
         "https://api.pinduoduo.com/api/cappuccino/splash?app_version=1",
         "https://api.yangkeduo.com/api/cappuccino/splash",
         "https://acs.m.goofish.com/gw/mtop.taobao.idlecommerce.splash.ads/1.0/?data=x",
@@ -110,6 +112,17 @@ def main():
 
     # Normal and shared interfaces must never match, even when a query mentions splash.
     negative = [
+        "https://api.coolapk.com/v6/feed/detail?feedid=1",
+        "https://api.coolapk.com/v6/feed/replyList?feedid=1",
+        "https://api.coolapk.com/v6/main/dataList?x=1",
+        "https://api.coolapk.com/v6/main/indexV8?x=1",
+        "https://api.coolapk.com/v6/page/dataList?x=1",
+        "https://api.coolapk.com/v6/search?type=hotSearch",
+        "https://api.coolapk.com/v6/account/loadConfig?key=my_page_card_config",
+        "https://api.coolapk.com/v6/main/initOther?x=1",
+        "https://api.coolapk.com/v60/main/init?x=1",
+        "https://api-access.pangolin-sdk-toutiao.com/api/ad/union/sdk",
+        "https://ads.pangle.cn/api/ad/union/sdk",
         "https://app.bilibili.com/x/v2/feed/index?screen=splash",
         "https://app.bilibili.com/x/v2/view?aid=1",
         "https://app.bilibili.com/x/v2/reply?aid=1",
@@ -160,24 +173,34 @@ def main():
     for url in negative:
         assert not any(pattern.search(url) for pattern in handlers), f"Overbroad match: {url}"
 
-    assert len(jq_filters) == 2
+    assert len(jq_filters) == 3
     assert shutil.which("jq"), "Install jq to check JSON preservation"
 
     def jq(expression, value):
         result = subprocess.run(["jq", "-c", expression], input=json.dumps(value), text=True, capture_output=True, check=True)
         return json.loads(result.stdout)
 
-    jd, xhs = jq_filters
+    jd, xhs, coolapk = jq_filters
     startup = {"images": [[{"url": "ad.jpg", "showTimes": 5}]], "showTimesDaily": 5,
                "code": 0, "login": {"enabled": True}, "home": [1, 2], "version": "test"}
     assert jq(jd, startup) == {**startup, "images": [], "showTimesDaily": 0}
     splash = {"code": 0, "data": {"ads_groups": [{"ads": [{"id": 1}]}], "normal_config": {"enabled": True}}, "trace": "keep"}
     assert jq(xhs, splash) == {**splash, "data": {**splash["data"], "ads_groups": []}}
+    init = {"code": 0, "data": [{"entityId": 944, "title": "热搜"}, {"entityId": 945, "title": "开屏"},
+            {"entityId": 6390, "title": "首页Tab"}, {"entityId": 20131, "entities": [{"title": "酷品"}]},
+            None, 945, "945", {"entityId": "945"}, {"title": "未知模块"}, [945],
+            {"entityId": 945, "title": "另一开屏项"}], "trace": {"keep": True}}
+    expected_init = {**init, "data": init["data"][:1] + init["data"][2:-1]}
+    assert jq(coolapk, init) == expected_init
+    assert jq(coolapk, expected_init) == expected_init
     for unchanged in [None, [], [1], "text", 1, False, {}, {"data": None}, {"data": []}, {"data": "text"},
                       {"data": {"ads_groups": "unexpected"}}, {"data": {"normal_config": 1}},
                       {"images": None, "showTimesDaily": "unexpected"}]:
         assert jq(jd, unchanged) == unchanged
         assert jq(xhs, unchanged) == unchanged
+        assert jq(coolapk, unchanged) == unchanged
+    for unchanged in [{"data": [944, 6390, None, {}, {"entityId": 944}]}, {"data": 945}]:
+        assert jq(coolapk, unchanged) == unchanged
     assert jq(jd, {"images": [], "showTimesDaily": 0}) == {"images": [], "showTimesDaily": 0}
     assert jq(xhs, {"data": {"ads_groups": []}}) == {"data": {"ads_groups": []}}
 

@@ -49,16 +49,16 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 - `limelisest-loon-config.lcf`: main cloud config, recommended for import
 - `rules/limelisest-direct.lsr`: self-maintained DIRECT cloud rule for Tencent/QQ/domestic overrides
 - `plugins/Bilibili-Splash-Only.plugin`: splash-only BiliBili configuration using the pinned upstream Biliverse ADBlock v0.7.5 response script
-- `plugins/CN-Splash-Only.plugin`: combined splash-only plugin for 34 apps; [coverage and limitations](plugins/CN-Splash-Only.md)
+- `plugins/CN-Splash-Only.plugin`: combined splash-only plugin for 35 apps; [coverage and limitations](plugins/CN-Splash-Only.md)
 - `scripts/check_splash_plugin.py`: URL scope, MITM, enabled-plugin and JSON preservation regression checks (requires `jq`)
 - `sources.md`: upstream/source tracking
 - `LICENSE`: repository license
 
 ## 插件精简（2026-10-20）
 
-仅启用截图中的 WeatherKit、Kelee YouTube 去广告，以及本站的 [国内常用 App · 仅开屏插件](https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin)。新插件整合 34 个 App 的已知开屏接口 / 专用素材，包括 B站、淘宝、京东、拼多多、闲鱼、小红书、知乎、地图、外卖等；[完整覆盖与限制](plugins/CN-Splash-Only.md)。其他插件统一设为 `enabled=false`，包括原 B站完整去广告、旧 B站仅开屏项、通用去广告、HTTPDNS、BoxJS、Sub-Store、Script-Hub 和 DualSubs，保留原地址以便恢复。
+仅启用截图中的 WeatherKit、Kelee YouTube 去广告，以及本站的 [国内常用 App · 仅开屏插件](https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin)。新插件整合 35 个 App 的已知开屏接口 / 专用素材，包括 B站、淘宝、京东、拼多多、闲鱼、小红书、知乎、地图、外卖等；[完整覆盖与限制](plugins/CN-Splash-Only.md)。其他插件统一设为 `enabled=false`，包括原 B站完整去广告、旧 B站仅开屏项、通用去广告、HTTPDNS、BoxJS、Sub-Store、Script-Hub 和 DualSubs，保留原地址以便恢复。
 
-B站继续仅匹配 `app.bilibili.com` / `app.biliapi.net` 下的 `/x/v2/splash/list`、`show`、`brand/list` 和 `event/list2`，使用 [Biliverse ADBlock v0.7.5](https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5) 的远程响应脚本。京东、小红书只修改开屏字段；其他收录项按开屏 URL 拒绝请求。插件不注册评论、视频详情或首页信息流处理。这是本站维护的精简配置，并非上游独立发行版；版本升级需核对后再修改。需 **Loon Build 729+**，开启 MITM 并信任证书。
+B站继续仅匹配 `app.bilibili.com` / `app.biliapi.net` 下的 `/x/v2/splash/list`、`show`、`brand/list` 和 `event/list2`，使用 [Biliverse ADBlock v0.7.5](https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5) 的远程响应脚本。京东、小红书、酷安只修改开屏字段；其他收录项按开屏 URL 拒绝请求。插件不注册评论、视频详情或首页信息流处理。这是本站维护的精简配置，并非上游独立发行版；版本升级需核对后再修改。需 **Loon Build 729+**，开启 MITM 并信任证书。
 
 更新云配置后检查插件启用状态；手动单独安装的旧插件也需停用，避免叠加。首次冷启动仍可能显示已有的开屏缓存。URL 匹配和资源下载验证不代替 iPhone 实测，评论区、视频详情及开屏效果仍需在设备上确认。
 

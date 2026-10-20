@@ -58,6 +58,7 @@
 - BiliBili uses the same pinned Biliverse ADBlock v0.7.5 remote script (Apache-2.0) as the standalone variant; the script is not bundled. Only four splash handlers are registered.
 - Native jq rewrite requirements: https://nsloon.app/docs/Rewrite/ — response body JSON actions require Loon Build 729+ and valid JSON. Tests use local `jq`; native Loon parsing and device effects are not validated.
 - No automatic import of either upstream's complete ad-removal bundle. Rule changes require review of whether the interface remains splash-specific. No claim of all-version or all-app coverage.
+- Coolapk addition (2026-10-20): https://github.com/AEtso/Loon/blob/master/Scripts/coolapk.js explicitly identifies `main/init` entityId 945 as splash, 944 as hot search, and 6390 as home tabs. The script itself is dated 2023-12-11; the 945 identifier is also present in the currently published https://github.com/Thelongdarkorg/loon-plugins/blob/main/coolapk_splash_ad_block.plugin (header update 2026-09-18). A locally written jq expression removes only the numeric 945 item and preserves all other entries, including unknown/malformed entries. No feed/reply/page cleanup or shared Pangle SDK blocking is imported. Current app-version behavior remains unverified.
 
 ## Previous design references
 
