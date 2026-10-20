@@ -40,7 +40,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 7. `游戏服务` uses the upstream aggregate `Game` rule with policy `Game`, covering Steam, Epic, Xbox, Nintendo/Switch, PlayStation, EA, Blizzard, Ubisoft and other platforms. Nintendo/Switch now has a dedicated `Nintendo` group and rule before `Game`, defaulting to `Game`; select a concrete node via `All` when diagnosing connections. Separate Steam/Epic rules are retained but disabled to avoid duplicate matching.
 8. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the redundant `Proxy` rule is retained but disabled because Global already includes it.
 9. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
-10. Only three plugins are enabled: WeatherKit, Kelee YouTube ad removal, and the self-hosted BiliBili splash-only configuration. The original full BiliBili plugin and all other plugins are disabled; their URLs remain available for rollback.
+10. Only three plugins are enabled: WeatherKit, Kelee YouTube ad removal, and the self-hosted combined CN splash-only plugin (including BiliBili). Other plugins, including both older BiliBili entries, remain disabled for rollback. The combined plugin requires Loon Build 729+.
 11. `iOS推送` directly references QuixoticHeart's Loon `apns.list`, defaults to `DIRECT`, and can be switched to `兜底后备`. The rule covers APNs domains plus selected IPv4/IPv6 prefixes; APNs domains remain excluded from MITM.
 12. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
@@ -49,18 +49,22 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 - `limelisest-loon-config.lcf`: main cloud config, recommended for import
 - `rules/limelisest-direct.lsr`: self-maintained DIRECT cloud rule for Tencent/QQ/domestic overrides
 - `plugins/Bilibili-Splash-Only.plugin`: splash-only BiliBili configuration using the pinned upstream Biliverse ADBlock v0.7.5 response script
+- `plugins/CN-Splash-Only.plugin`: combined splash-only plugin for 34 apps; [coverage and limitations](plugins/CN-Splash-Only.md)
+- `scripts/check_splash_plugin.py`: URL scope, MITM, enabled-plugin and JSON preservation regression checks (requires `jq`)
 - `sources.md`: upstream/source tracking
 - `LICENSE`: repository license
 
 ## 插件精简（2026-10-20）
 
-仅启用截图中的 WeatherKit、Kelee YouTube 去广告，以及本站的 [哔哩哔哩·仅开屏插件](https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin)。其他插件统一设为 `enabled=false`，包括原 B站完整去广告、通用去广告、HTTPDNS、BoxJS、Sub-Store、Script-Hub 和 DualSubs，保留原地址以便恢复。
+仅启用截图中的 WeatherKit、Kelee YouTube 去广告，以及本站的 [国内常用 App · 仅开屏插件](https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin)。新插件整合 34 个 App 的已知开屏接口 / 专用素材，包括 B站、淘宝、京东、拼多多、闲鱼、小红书、知乎、地图、外卖等；[完整覆盖与限制](plugins/CN-Splash-Only.md)。其他插件统一设为 `enabled=false`，包括原 B站完整去广告、旧 B站仅开屏项、通用去广告、HTTPDNS、BoxJS、Sub-Store、Script-Hub 和 DualSubs，保留原地址以便恢复。
 
-B站仅开屏配置只匹配 `app.bilibili.com` / `app.biliapi.net` 下的 `/x/v2/splash/list`、`show`、`brand/list` 和 `event/list2`，使用 [Biliverse ADBlock v0.7.5](https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5) 的远程响应脚本，不注册评论、视频详情或首页请求处理。这是本站精简配置，并非上游独立发行版；脚本版本固定，后续升级需核对后再修改。需在 Loon 开启 MITM 并信任证书。
+B站继续仅匹配 `app.bilibili.com` / `app.biliapi.net` 下的 `/x/v2/splash/list`、`show`、`brand/list` 和 `event/list2`，使用 [Biliverse ADBlock v0.7.5](https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5) 的远程响应脚本。京东、小红书只修改开屏字段；其他收录项按开屏 URL 拒绝请求。插件不注册评论、视频详情或首页信息流处理。这是本站维护的精简配置，并非上游独立发行版；版本升级需核对后再修改。需 **Loon Build 729+**，开启 MITM 并信任证书。
 
 更新云配置后检查插件启用状态；手动单独安装的旧插件也需停用，避免叠加。首次冷启动仍可能显示已有的开屏缓存。URL 匹配和资源下载验证不代替 iPhone 实测，评论区、视频详情及开屏效果仍需在设备上确认。
 
 本次仅精简插件，`[Remote Rule]` 中的 AdvertisingLite / Hijacking 等规则订阅保留，因此整个配置仍包含通用广告域名拦截。
+
+仓库默认采用 MIT；`plugins/CN-Splash-Only.plugin` 含来自 blackmatrix7 的改编规则，单独采用 [GPL-2.0](licenses/GPL-2.0.txt)，详见 [sources.md](sources.md)。
 
 ## Discord / Nintendo Switch App 连接排查（2026-09-26）
 

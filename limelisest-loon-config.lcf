@@ -168,7 +168,7 @@ iosapps.itunes.apple.com = iosapps.itunes.apple.com.download.ks-cdn.com
 [Script]
 
 [Plugin]
-# 仅启用 WeatherKit、YouTube 去广告和 B站仅开屏；其他插件暂时停用，保留地址以便恢复。
+# 仅启用 WeatherKit、YouTube 去广告和国内常用App仅开屏；其他插件暂时停用，保留地址以便恢复。
 https://github.com/VirgilClyne/GetSomeFries/raw/main/plugin/General.plugin, enabled=false
 https://github.com/chavyleung/scripts/raw/master/box/rewrite/boxjs.rewrite.loon.plugin, enabled=false
 https://github.com/sub-store-org/Sub-Store/raw/master/config/Loon.plugin, enabled=false
@@ -198,7 +198,8 @@ https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=false
 https://github.com/DualSubs/Spotify/releases/latest/download/DualSubs.Spotify.plugin, enabled=false
 https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.plugin, enabled=false
 https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin, tag=WeatherKit[仅限iOS18及以上], enabled=true
-https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin, tag=哔哩哔哩·仅开屏, enabled=true
+https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin, tag=哔哩哔哩·仅开屏, enabled=false
+https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin, tag=国内常用App·仅开屏, enabled=true
 
 [Mitm]
 # Explicitly exclude APNs from HTTPS decryption. Routing via iOS推送 does not require MITM.

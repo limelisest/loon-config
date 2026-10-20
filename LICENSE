@@ -1,5 +1,9 @@
 MIT License
 
+Scope: repository files except plugins/CN-Splash-Only.plugin, which contains
+rules adapted from blackmatrix7/ios_rule_script and is licensed separately
+under GPL-2.0-only. See licenses/GPL-2.0.txt and sources.md.
+
 Copyright (c) 2026 limelisest
 Portions copied from Repcz/Tool: Copyright (c) 2024 Repcz
 
