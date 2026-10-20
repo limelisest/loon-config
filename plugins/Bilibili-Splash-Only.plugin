@@ -1,0 +1,9 @@
+#!name=哔哩哔哩·仅开屏
+#!desc=从 Biliverse ADBlock v0.7.5 提取开屏匹配；自定义精简配置，非上游独立发行版。需开启 MITM 并信任证书。
+#!homepage=https://github.com/Biliverse/ADBlock
+
+[Script]
+http-response ^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/v2\/splash\/(brand\/list|event\/list2|list|show)(\?|$) requires-body=1, script-path=https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js, tag=Bilibili-Splash-Only
+
+[MITM]
+hostname=app.bilibili.com, app.biliapi.net

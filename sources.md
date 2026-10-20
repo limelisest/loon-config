@@ -34,10 +34,16 @@
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-without-asn.mmdb`
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb`
 - Icons from Koolson/Qure, Orz-3/mini, and lige47/QuanX-icon-rule.
-- Plugins from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, DualSubs, and NSRingo.
+- Active plugins: Kelee YouTube ad removal, NSRingo WeatherKit, and the self-hosted BiliBili splash-only configuration. Other inherited plugin URLs from VirgilClyne/GetSomeFries, chavyleung/scripts, sub-store-org/Sub-Store, Script-Hub-Org/Script-Hub, kelee.one, and DualSubs remain listed but disabled as of 2026-10-20.
 - Added user-requested plugin references:
-  - BiliBili ad removal: https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx
+  - Original full BiliBili ad removal (disabled): https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx
   - iRingo WeatherKit v2.0.1: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin
+  - YouTube ad removal (retained unchanged): https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx
+  - Self-hosted BiliBili splash-only configuration: https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin
+    - Upstream: https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5 (Apache-2.0); the remote response script is referenced, not copied into this repository.
+    - Script: https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js
+    - Matching scope is narrowed from the upstream Loon template to four `/x/v2/splash/` endpoints only; no comment, video-detail, feed, or other handlers are registered.
+    - This is a local configuration variant, not an independently published upstream splash-only plugin. Keep the pinned script version unless its behavior is reviewed before updating.
 
 ## Previous design references
 

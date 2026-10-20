@@ -40,7 +40,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 7. `游戏服务` uses the upstream aggregate `Game` rule with policy `Game`, covering Steam, Epic, Xbox, Nintendo/Switch, PlayStation, EA, Blizzard, Ubisoft and other platforms. Nintendo/Switch now has a dedicated `Nintendo` group and rule before `Game`, defaulting to `Game`; select a concrete node via `All` when diagnosing connections. Separate Steam/Epic rules are retained but disabled to avoid duplicate matching.
 8. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the redundant `Proxy` rule is retained but disabled because Global already includes it.
 9. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
-10. BiliBili ad removal uses the original Kelee `Bilibili_remove_ads.lpx`, enabled by default.
+10. Only three plugins are enabled: WeatherKit, Kelee YouTube ad removal, and the self-hosted BiliBili splash-only configuration. The original full BiliBili plugin and all other plugins are disabled; their URLs remain available for rollback.
 11. `iOS推送` directly references QuixoticHeart's Loon `apns.list`, defaults to `DIRECT`, and can be switched to `兜底后备`. The rule covers APNs domains plus selected IPv4/IPv6 prefixes; APNs domains remain excluded from MITM.
 12. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
@@ -48,8 +48,19 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 
 - `limelisest-loon-config.lcf`: main cloud config, recommended for import
 - `rules/limelisest-direct.lsr`: self-maintained DIRECT cloud rule for Tencent/QQ/domestic overrides
+- `plugins/Bilibili-Splash-Only.plugin`: splash-only BiliBili configuration using the pinned upstream Biliverse ADBlock v0.7.5 response script
 - `sources.md`: upstream/source tracking
 - `LICENSE`: repository license
+
+## 插件精简（2026-10-20）
+
+仅启用截图中的 WeatherKit、Kelee YouTube 去广告，以及本站的 [哔哩哔哩·仅开屏插件](https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin)。其他插件统一设为 `enabled=false`，包括原 B站完整去广告、通用去广告、HTTPDNS、BoxJS、Sub-Store、Script-Hub 和 DualSubs，保留原地址以便恢复。
+
+B站仅开屏配置只匹配 `app.bilibili.com` / `app.biliapi.net` 下的 `/x/v2/splash/list`、`show`、`brand/list` 和 `event/list2`，使用 [Biliverse ADBlock v0.7.5](https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5) 的远程响应脚本，不注册评论、视频详情或首页请求处理。这是本站精简配置，并非上游独立发行版；脚本版本固定，后续升级需核对后再修改。需在 Loon 开启 MITM 并信任证书。
+
+更新云配置后检查插件启用状态；手动单独安装的旧插件也需停用，避免叠加。首次冷启动仍可能显示已有的开屏缓存。URL 匹配和资源下载验证不代替 iPhone 实测，评论区、视频详情及开屏效果仍需在设备上确认。
+
+本次仅精简插件，`[Remote Rule]` 中的 AdvertisingLite / Hijacking 等规则订阅保留，因此整个配置仍包含通用广告域名拦截。
 
 ## Discord / Nintendo Switch App 连接排查（2026-09-26）
 
@@ -65,7 +76,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 
 - 第一轮检查的 38 个远程规则 URL（含禁用项及新增两项）均返回 HTTP 200；7 个非 Kelee 插件 URL 也返回 200，仅证明下载可达。
 - 20 个 `kelee.one` 插件 URL 从本机请求均返回 403；可能是客户端限制，不能据此断言 Loon 下载失败。保留原地址，请检查 Loon 内插件更新结果。未能检查其内容或脚本冲突。
-- `Script-Hub` 有官方插件和 Kelee 插件两个入口；YouTube/Spotify 也同时有多个处理插件。若相关应用异常，逐个关闭对应插件做对照，不要同时叠加排查。
+- 当时的 `Script-Hub` 有官方插件和 Kelee 插件两个入口，YouTube/Spotify 也同时有多个处理插件；2026-10-20 已统一停用这些额外入口，仅保留 Kelee YouTube 去广告。
 - Nintendo 上游包含 `35.192.0.0/12` 大网段，原 Game 列表也包含它；该 IP 规则并非只代表任天堂。未扩大网段，未添加通用 UDP 全代理规则。
 - `FINAL,DIRECT` 仍保留：其他未列入规则的海外服务可能直连；节点订阅为空是公共模板设计，需要 Loon 本地已有节点。
 - 此仓库只能做静态检查与资源可达性验证；最终需要 Loon 导入、真实节点及 Nintendo Switch App/Discord 实机验证。

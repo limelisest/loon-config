@@ -168,35 +168,37 @@ iosapps.itunes.apple.com = iosapps.itunes.apple.com.download.ks-cdn.com
 [Script]
 
 [Plugin]
-https://github.com/VirgilClyne/GetSomeFries/raw/main/plugin/General.plugin, enabled=true
-https://github.com/chavyleung/scripts/raw/master/box/rewrite/boxjs.rewrite.loon.plugin, enabled=true
-https://github.com/sub-store-org/Sub-Store/raw/master/config/Loon.plugin, enabled=true
-https://github.com/Script-Hub-Org/Script-Hub/raw/main/modules/script-hub.loon.plugin, enabled=true
+# 仅启用 WeatherKit、YouTube 去广告和 B站仅开屏；其他插件暂时停用，保留地址以便恢复。
+https://github.com/VirgilClyne/GetSomeFries/raw/main/plugin/General.plugin, enabled=false
+https://github.com/chavyleung/scripts/raw/master/box/rewrite/boxjs.rewrite.loon.plugin, enabled=false
+https://github.com/sub-store-org/Sub-Store/raw/master/config/Loon.plugin, enabled=false
+https://github.com/Script-Hub-Org/Script-Hub/raw/main/modules/script-hub.loon.plugin, enabled=false
 
-https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Remove_ads_by_keli.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/PinDuoDuo_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/DiDi_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/12306_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/BaiduNetDisk_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/RedPaper_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/CoolApk_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/NeteaseCloudMusic_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Zhihu_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Cainiao_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/Remove_ads_by_keli.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/PinDuoDuo_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/DiDi_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/12306_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/BaiduNetDisk_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/RedPaper_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/CoolApk_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/NeteaseCloudMusic_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/Zhihu_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/Cainiao_remove_ads.lpx, enabled=false
 https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/IThome_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/smzdm_remove_ads.lpx, enabled=true
-https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/IThome_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/Script-Hub.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/smzdm_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/Spotify_remove_ads.lpx, enabled=false
 
-https://github.com/DualSubs/Spotify/releases/latest/download/DualSubs.Spotify.plugin, enabled=true
-https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.plugin, enabled=true
+https://github.com/DualSubs/Spotify/releases/latest/download/DualSubs.Spotify.plugin, enabled=false
+https://github.com/DualSubs/YouTube/releases/latest/download/DualSubs.YouTube.plugin, enabled=false
 https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin, tag=WeatherKit[仅限iOS18及以上], enabled=true
+https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin, tag=哔哩哔哩·仅开屏, enabled=true
 
 [Mitm]
 # Explicitly exclude APNs from HTTPS decryption. Routing via iOS推送 does not require MITM.
