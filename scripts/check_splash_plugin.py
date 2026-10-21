@@ -27,7 +27,8 @@ def sections(text):
 
 def main():
     content = sections(PLUGIN.read_text())
-    assert set(content) == {"rewrite", "script", "mitm"}, "Unexpected processing section"
+    assert set(content) == {"rewrite", "mitm"}, "Unexpected processing section"
+    assert "script-path=" not in PLUGIN.read_text(), "Combined plugin must not import scripts"
     handlers = []
     jq_filters = []
     for line in content["rewrite"]:
@@ -38,13 +39,9 @@ def main():
             expression = action.split(" ", 1)[1]
             assert expression.startswith("'") and expression.endswith("'")
             jq_filters.append(expression[1:-1])
-    assert len(content["script"]) == 1
-    script = content["script"][0]
-    assert "releases/download/v0.7.5/response.bundle.js" in script
-    assert "requires-body=1" in script
-    handlers.append(re.compile(script.split()[1]))
     hosts = {s.strip() for s in content["mitm"][0].split("=", 1)[1].split(",")}
     assert all(not any(c in host for c in "*?") for host in hosts), "Use exact MITM hosts"
+    assert not any("bilibili" in host or "biliapi" in host for host in hosts), "BiliBili MITM belongs to standalone official plugin"
 
     # Concrete endpoint examples, not fetched responses. Cover every registered handler.
     positive = [
@@ -98,10 +95,6 @@ def main():
         "https://open.taou.com/maimai/launch_ad",
         "https://sdkapp.uve.weibo.com/interface/sdk/sdkad.php?x=1&sub_ad_type=splash&y=1",
     ]
-    for host in ["app.bilibili.com", "app.biliapi.net"]:
-        for route in ["list", "show", "brand/list", "event/list2"]:
-            positive.append(f"https://{host}/x/v2/splash/{route}?build=1")
-
     covered = set()
     for url in positive:
         matches = {i for i, pattern in enumerate(handlers) if pattern.search(url)}
@@ -158,6 +151,11 @@ def main():
         "https://sdkapp.uve.weibo.com/interface/sdk/sdkad.php?sub_ad_type=splashExtra",
         "https://sdkapp.uve.weibo.com/interface/sdk/sdkad.php?xsub_ad_type=splash",
     ]
+    # BiliBili, including splash, is handled exclusively by the separate official plugin.
+    for host in ["app.bilibili.com", "app.biliapi.net"]:
+        for route in ["list", "show", "brand/list", "event/list2"]:
+            negative.append(f"https://{host}/x/v2/splash/{route}?build=1")
+
     # Detect unanchored hosts and page-wide matching on every intercepted host.
     splash_material_hosts = {"splashimgbssdl.yun.kugou.com", "splashimgretrybssdl.cloud.kugou.com"}
     for url in positive:
@@ -210,10 +208,11 @@ def main():
         "https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx",
         "https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin",
         "https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin",
+        "https://github.com/Biliverse/ADBlock/releases/latest/download/BiliBili.ADBlock.plugin",
     }
-    assert len(enabled) == 3
+    assert len(enabled) == 4
     assert "GNU GENERAL PUBLIC LICENSE" in (ROOT / "licenses/GPL-2.0.txt").read_text()
-    print(f"PASS: {len(handlers)} handlers; {len(positive)} splash URLs; {len(negative)} excluded URLs; jq preservation; 3 enabled plugins")
+    print(f"PASS: {len(handlers)} handlers; {len(positive)} splash URLs; {len(negative)} excluded URLs; jq preservation; 4 enabled plugins")
     print("Static checks only; native Loon parsing and iPhone behavior not tested.")
 
 

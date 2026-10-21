@@ -40,7 +40,7 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 7. `游戏服务` uses the upstream aggregate `Game` rule with policy `Game`, covering Steam, Epic, Xbox, Nintendo/Switch, PlayStation, EA, Blizzard, Ubisoft and other platforms. Nintendo/Switch now has a dedicated `Nintendo` group and rule before `Game`, defaulting to `Game`; select a concrete node via `All` when diagnosing connections. Separate Steam/Epic rules are retained but disabled to avoid duplicate matching.
 8. Default route is `DIRECT` (`FINAL,DIRECT`). Foreign access relies on upstream `Global`/GFW-style rules to enter `兜底后备`; the redundant `Proxy` rule is retained but disabled because Global already includes it.
 9. Apple rules default to `DIRECT`; ChinaMax is enabled for broad CN direct matching, while the old China rule is kept disabled. Tencent/QQ overrides are maintained in the cloud rule `rules/limelisest-direct.lsr` and referenced before upstream proxy rules.
-10. Only three plugins are enabled: WeatherKit, Kelee YouTube ad removal, and the self-hosted combined CN splash-only plugin (including BiliBili). Other plugins, including both older BiliBili entries, remain disabled for rollback. The combined plugin requires Loon Build 729+.
+10. Four plugins are enabled: WeatherKit, Kelee YouTube ad removal, the standalone official Biliverse BiliBili plugin, and the self-hosted combined CN splash-only plugin (excluding BiliBili). Other plugins, including both older BiliBili entries, remain disabled for rollback. The combined plugin requires Loon Build 729+.
 11. `iOS推送` directly references QuixoticHeart's Loon `apns.list`, defaults to `DIRECT`, and can be switched to `兜底后备`. The rule covers APNs domains plus selected IPv4/IPv6 prefixes; APNs domains remain excluded from MITM.
 12. Keep secrets out of this public repo: subscription URLs, node passwords, cookies, MITM certificates, private keys.
 
@@ -49,16 +49,16 @@ https://raw.githubusercontent.com/limelisest/loon-config/main/limelisest-loon-co
 - `limelisest-loon-config.lcf`: main cloud config, recommended for import
 - `rules/limelisest-direct.lsr`: self-maintained DIRECT cloud rule for Tencent/QQ/domestic overrides
 - `plugins/Bilibili-Splash-Only.plugin`: splash-only BiliBili configuration using the pinned upstream Biliverse ADBlock v0.7.5 response script
-- `plugins/CN-Splash-Only.plugin`: combined splash-only plugin for 35 apps; [coverage and limitations](plugins/CN-Splash-Only.md)
+- `plugins/CN-Splash-Only.plugin`: combined splash-only plugin for 34 apps (excluding BiliBili); [coverage and limitations](plugins/CN-Splash-Only.md)
 - `scripts/check_splash_plugin.py`: URL scope, MITM, enabled-plugin and JSON preservation regression checks (requires `jq`)
 - `sources.md`: upstream/source tracking
 - `LICENSE`: repository license
 
-## 插件精简（2026-10-20）
+## 插件配置（2026-10-21）
 
-仅启用截图中的 WeatherKit、Kelee YouTube 去广告，以及本站的 [国内常用 App · 仅开屏插件](https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin)。新插件整合 35 个 App 的已知开屏接口 / 专用素材，包括 B站、淘宝、京东、拼多多、闲鱼、小红书、知乎、地图、外卖等；[完整覆盖与限制](plugins/CN-Splash-Only.md)。其他插件统一设为 `enabled=false`，包括原 B站完整去广告、旧 B站仅开屏项、通用去广告、HTTPDNS、BoxJS、Sub-Store、Script-Hub 和 DualSubs，保留原地址以便恢复。
+启用 WeatherKit、Kelee YouTube 去广告、独立的 [Biliverse B站官方插件](https://github.com/Biliverse/ADBlock/releases/latest/download/BiliBili.ADBlock.plugin)，以及本站的 [国内常用 App · 仅开屏插件](https://limelisest.github.io/loon-config/plugins/CN-Splash-Only.plugin)，共四项。合并插件整合 34 个 App 的已知开屏接口 / 专用素材，包括淘宝、京东、拼多多、闲鱼、小红书、酷安、知乎、地图、外卖等；[完整覆盖与限制](plugins/CN-Splash-Only.md)。其他插件统一设为 `enabled=false`，包括旧 Kelee B站完整去广告、旧 B站仅开屏项、通用去广告、HTTPDNS、BoxJS、Sub-Store、Script-Hub 和 DualSubs，保留原地址以便恢复。
 
-B站继续仅匹配 `app.bilibili.com` / `app.biliapi.net` 下的 `/x/v2/splash/list`、`show`、`brand/list` 和 `event/list2`，使用 [Biliverse ADBlock v0.7.5](https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5) 的远程响应脚本。京东、小红书、酷安只修改开屏字段；其他收录项按开屏 URL 拒绝请求。插件不注册评论、视频详情或首页信息流处理。这是本站维护的精简配置，并非上游独立发行版；版本升级需核对后再修改。需 **Loon Build 729+**，开启 MITM 并信任证书。
+B站已从合并插件中移出，直接订阅用户指定的 Biliverse `releases/latest/download/BiliBili.ADBlock.plugin`，使用官方默认参数并跟随最新发布版；这是完整去广告插件，范围不限于开屏。旧 Kelee B站插件和本站 B站仅开屏项均保持停用。国内合并插件不再包含 B站脚本或 MITM 主机；京东、小红书、酷安只修改开屏字段，其他收录项按开屏 URL 拒绝请求。合并插件需 **Loon Build 729+**，开启 MITM 并信任证书。
 
 更新云配置后检查插件启用状态；手动单独安装的旧插件也需停用，避免叠加。首次冷启动仍可能显示已有的开屏缓存。URL 匹配和资源下载验证不代替 iPhone 实测，评论区、视频详情及开屏效果仍需在设备上确认。
 

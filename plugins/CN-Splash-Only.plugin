@@ -2,13 +2,13 @@
 #!desc=仅处理已收录的开屏接口与专用素材；不做页面净化。需 Loon Build 729+、开启 MITM 并信任证书。规则覆盖与限制见 homepage；未完成设备实测。
 #!author=limelisest; rules adapted from blackmatrix7/ios_rule_script
 #!homepage=https://github.com/limelisest/loon-config/blob/main/plugins/CN-Splash-Only.md
-#!date=2026-10-20
+#!date=2026-10-21
 # SPDX-License-Identifier: GPL-2.0-only
 # Portions adapted from blackmatrix7/ios_rule_script (GPL-2.0).
 # Modified 2026-10-20: exact hosts/endpoint boundaries, splash-only selection.
 # Source and license: ../sources.md and ../licenses/GPL-2.0.txt
 # Standalone source: https://github.com/limelisest/loon-config
-# No warranty; see the GPL-2.0 license. Biliverse script is referenced, not bundled.
+# No warranty; see the GPL-2.0 license.
 
 [Rewrite]
 # 京东：保留启动配置，只清空开屏图和展示次数；functionId 必须完整匹配。
@@ -68,9 +68,5 @@
 # 微博：共享 SDK 请求必须明确指定 sub_ad_type=splash。
 ^https?:\/\/sdkapp\.uve\.weibo\.com\/[^?#]*\?(?:[^&#]+&)*sub_ad_type=splash(?:&|$) reject-dict
 
-[Script]
-# 哔哩哔哩：固定 Biliverse 版本；仅注册四个开屏接口。
-http-response ^https?:\/\/app\.bili(bili\.com|api\.net)\/x\/v2\/splash\/(brand\/list|event\/list2|list|show)(\?|$) requires-body=1, script-path=https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js, tag=Bilibili-Splash-Only
-
 [MITM]
-hostname=api.coolapk.com, api.m.jd.com, edith.xiaohongshu.com, www.xiaohongshu.com, api.pinduoduo.com, api.yangkeduo.com, acs.m.goofish.com, acs.m.taobao.com, guide-acs.m.taobao.com, api.zhihu.com, api.douban.com, amap-aos-info-nogw.amap.com, m0.amap.com, m1.amap.com, m2.amap.com, m3.amap.com, m4.amap.com, m5.amap.com, m6.amap.com, m7.amap.com, m8.amap.com, m9.amap.com, 4gimg.map.qq.com, wmapi.meituan.com, api.mcd.cn, gateway.abite.com, maicai.api.ddxq.mobi, client.qunar.com, homefront.qunar.com, mapi.mafengwo.cn, m.tuniu.com, client.tujia.com, wcprd.hilton.com.cn, open.qyer.com, r.inews.qq.com, pdapis.pdnews.cn, c.tieba.baidu.com, bbs-api.miyoushe.com, y.gtimg.cn, splashimgbssdl.yun.kugou.com, splashimgretrybssdl.cloud.kugou.com, api.xueqiu.com, m.client.10010.com, cloud.189.cn, cdke.youdao.com, mage.if.qidian.com, client-api.oray.com, client-api-v2.oray.com, api.taou.com, open.taou.com, sdkapp.uve.weibo.com, app.bilibili.com, app.biliapi.net
+hostname=api.coolapk.com, api.m.jd.com, edith.xiaohongshu.com, www.xiaohongshu.com, api.pinduoduo.com, api.yangkeduo.com, acs.m.goofish.com, acs.m.taobao.com, guide-acs.m.taobao.com, api.zhihu.com, api.douban.com, amap-aos-info-nogw.amap.com, m0.amap.com, m1.amap.com, m2.amap.com, m3.amap.com, m4.amap.com, m5.amap.com, m6.amap.com, m7.amap.com, m8.amap.com, m9.amap.com, 4gimg.map.qq.com, wmapi.meituan.com, api.mcd.cn, gateway.abite.com, maicai.api.ddxq.mobi, client.qunar.com, homefront.qunar.com, mapi.mafengwo.cn, m.tuniu.com, client.tujia.com, wcprd.hilton.com.cn, open.qyer.com, r.inews.qq.com, pdapis.pdnews.cn, c.tieba.baidu.com, bbs-api.miyoushe.com, y.gtimg.cn, splashimgbssdl.yun.kugou.com, splashimgretrybssdl.cloud.kugou.com, api.xueqiu.com, m.client.10010.com, cloud.189.cn, cdke.youdao.com, mage.if.qidian.com, client-api.oray.com, client-api-v2.oray.com, api.taou.com, open.taou.com, sdkapp.uve.weibo.com

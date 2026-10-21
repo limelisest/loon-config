@@ -34,12 +34,14 @@
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/Country-without-asn.mmdb`
   - `https://raw.githubusercontent.com/Loyalsoldier/geoip/release/GeoLite2-ASN.mmdb`
 - Icons from Koolson/Qure, Orz-3/mini, and lige47/QuanX-icon-rule.
-- Active plugins: Kelee YouTube ad removal, NSRingo WeatherKit, and the self-hosted combined CN splash-only configuration (including BiliBili). Other inherited plugins and the standalone BiliBili splash-only entry remain listed but disabled as of 2026-10-20.
+- Active plugins: Kelee YouTube ad removal, NSRingo WeatherKit, the standalone official Biliverse BiliBili plugin, and the self-hosted combined CN splash-only configuration (excluding BiliBili). Other inherited plugins and the old standalone BiliBili splash-only entry remain listed but disabled as of 2026-10-21.
 - Added user-requested plugin references:
-  - Original full BiliBili ad removal (disabled): https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx
+  - Official BiliBili plugin (enabled separately, user-requested 2026-10-21): https://github.com/Biliverse/ADBlock/releases/latest/download/BiliBili.ADBlock.plugin
+    - Fetched successfully on 2026-10-21; plugin header reports v0.7.5. Uses upstream defaults and follows latest releases; this is full ad removal, not limited to splash. No BiliBili handler or MITM hostname remains in the combined plugin.
+  - Original Kelee full BiliBili ad removal (disabled): https://kelee.one/Tool/Loon/Lpx/Bilibili_remove_ads.lpx
   - iRingo WeatherKit v2.0.1: https://github.com/NSRingo/WeatherKit/releases/download/v2.0.1/iRingo.WeatherKit.plugin
   - YouTube ad removal (retained unchanged): https://kelee.one/Tool/Loon/Lpx/YouTube_remove_ads.lpx
-  - Self-hosted BiliBili splash-only configuration: https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin
+  - Legacy self-hosted BiliBili splash-only configuration (disabled): https://limelisest.github.io/loon-config/plugins/Bilibili-Splash-Only.plugin
     - Upstream: https://github.com/Biliverse/ADBlock/releases/tag/v0.7.5 (Apache-2.0); the remote response script is referenced, not copied into this repository.
     - Script: https://github.com/Biliverse/ADBlock/releases/download/v0.7.5/response.bundle.js
     - Matching scope is narrowed from the upstream Loon template to four `/x/v2/splash/` endpoints only; no comment, video-detail, feed, or other handlers are registered.
@@ -47,7 +49,7 @@
 
 ## Combined CN splash-only plugin (2026-10-20)
 
-- File: `plugins/CN-Splash-Only.plugin`; [coverage and limitations](plugins/CN-Splash-Only.md). This replaces the enabled standalone BiliBili splash-only entry, while leaving that file available.
+- File: `plugins/CN-Splash-Only.plugin`; [coverage and limitations](plugins/CN-Splash-Only.md). As of 2026-10-21 this contains 34 apps and excludes BiliBili; the official BiliBili plugin is enabled separately. The legacy splash-only file remains available but disabled.
 - Main rule source: blackmatrix7/ios_rule_script (GPL-2.0), reviewed 2026-10-20:
   - https://github.com/blackmatrix7/ios_rule_script/blob/master/rewrite/Loon/Advertising/Advertising.plugin
   - https://github.com/blackmatrix7/ios_rule_script/blob/master/rewrite/Loon/AdvertisingScript/AdvertisingScript.plugin
@@ -55,7 +57,7 @@
   - https://github.com/blackmatrix7/ios_rule_script/blob/master/LICENSE
 - Modifications: select splash-specific URLs only, restrict hosts and path/query boundaries, preserve mixed startup configuration, exclude broad shared-domain and page-cleanup rules. The combined plugin is distributed under GPL-2.0-only; full license in `licenses/GPL-2.0.txt`. The remainder of this repository retains its existing MIT license.
 - Endpoint/field facts cross-checked against https://github.com/Thelongdarkorg/loon-plugins on 2026-10-20: Xianyu splash/async endpoints, XHS ads_groups, QQ Music splash material directory, Kugou splash material hosts, and JD startup fields. Its complete plugins and jq expressions are not copied. Shared-domain, homepage, comment, search, video, HTTPDNS and QUIC rules from those plugins are excluded.
-- BiliBili uses the same pinned Biliverse ADBlock v0.7.5 remote script (Apache-2.0) as the standalone variant; the script is not bundled. Only four splash handlers are registered.
+- The original combined version referenced four BiliBili splash handlers via Biliverse v0.7.5 (Apache-2.0). On 2026-10-21 those handlers, the script section and the BiliBili MITM hosts were removed; the combined plugin now has no remote script dependency.
 - Native jq rewrite requirements: https://nsloon.app/docs/Rewrite/ — response body JSON actions require Loon Build 729+ and valid JSON. Tests use local `jq`; native Loon parsing and device effects are not validated.
 - No automatic import of either upstream's complete ad-removal bundle. Rule changes require review of whether the interface remains splash-specific. No claim of all-version or all-app coverage.
 - Coolapk addition (2026-10-20): https://github.com/AEtso/Loon/blob/master/Scripts/coolapk.js explicitly identifies `main/init` entityId 945 as splash, 944 as hot search, and 6390 as home tabs. The script itself is dated 2023-12-11; the 945 identifier is also present in the currently published https://github.com/Thelongdarkorg/loon-plugins/blob/main/coolapk_splash_ad_block.plugin (header update 2026-09-18). A locally written jq expression removes only the numeric 945 item and preserves all other entries, including unknown/malformed entries. No feed/reply/page cleanup or shared Pangle SDK blocking is imported. Current app-version behavior remains unverified.
